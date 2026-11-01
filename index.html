@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Hellora is an AI phone receptionist for local businesses. It answers calls, books appointments and takes orders.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#F97316">
+<title>Hellora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: left-aligned hero beside a switchable sample call log; a six-industry grid shows the product is not tied to one trade. */
+:root {
+  --bg: #FBFAF9;
+  --surface: #FFFFFF;
+  --ink: #1F1A17;
+  --muted: #5C524B;
+  --line: #E8E2DD;
+  --accent: #C2410C;
+  --accent-ink: #FFFFFF;
+  --soft: #FDEEE3;
+  --signal: #EA580C;
+  --cta: #F97316;
+  --cta-ink: #1A0B00;
+  --band: #1F1A17;
+  --band-ink: #FFF7F0;
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14100D; --surface: #1D1713; --ink: #F7F1EC; --muted: #B5A79C;
+    --line: #342B24; --accent: #FB923C; --accent-ink: #1A0B00; --soft: #2B1B10; --signal: #FB923C;
+    --cta: #FB923C; --cta-ink: #1A0B00; --band: #2A211B; --band-ink: #FFF7F0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14100D; --surface: #1D1713; --ink: #F7F1EC; --muted: #B5A79C;
+  --line: #342B24; --accent: #FB923C; --accent-ink: #1A0B00; --soft: #2B1B10; --signal: #FB923C;
+  --cta: #FB923C; --cta-ink: #1A0B00; --band: #2A211B; --band-ink: #FFF7F0;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+section { padding-block: 72px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.lede { color: var(--muted); font-size: 19px; max-width: 60ch; }
+
+/* header */
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 24px; text-decoration: none; letter-spacing: -0.02em; }
+.brand svg { width: 28px; height: 28px; flex: none; }
+nav { display: flex; align-items: center; gap: 24px; font-size: 15px; font-weight: 500; }
+nav a.link { text-decoration: none; color: var(--muted); }
+nav a.link:hover { color: var(--ink); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 46px; padding: 0 22px; border-radius: 10px;
+  background: var(--cta); color: var(--cta-ink);
+  font: 600 16px var(--font-body); text-decoration: none; border: 0; cursor: pointer;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.btn.ghost:hover { border-color: var(--accent); filter: none; }
+@media (max-width: 720px) { nav a.link { display: none; } }
+
+/* hero */
+.hero { padding-block: 40px 72px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.hero h1 { font-size: clamp(38px, 5.6vw, 64px); font-weight: 700; margin-bottom: 20px; }
+.hero .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero .fine { margin-top: 18px; font-size: 14px; color: var(--muted); }
+@media (max-width: 880px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
+
+/* sample call */
+.call { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.call-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.live { display: inline-flex; align-items: center; gap: 8px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--signal); }
+@media (prefers-reduced-motion: no-preference) {
+  .dot { animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+}
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 14px 0; }
+.tab { font: 500 14px var(--font-body); color: var(--muted); background: transparent; border: 1px solid transparent; border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { background: var(--soft); color: var(--accent); border-color: var(--line); }
+.transcript { padding: 16px 18px 6px; display: flex; flex-direction: column; gap: 12px; min-height: 250px; }
+.line { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 10px; font-size: 15.5px; line-height: 1.5; }
+.who { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding-top: 3px; }
+.line.ai .who { color: var(--accent); }
+.result { margin: 8px 18px 18px; padding: 14px 16px; border-radius: 12px; background: var(--soft); border: 1px solid var(--line); display: grid; gap: 4px; }
+.result b { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+.result span { font-size: 15px; }
+.call-note { padding: 0 18px 14px; font-size: 12.5px; color: var(--muted); }
+
+/* demo video */
+.demo { padding-block: 0 72px; }
+.demo .section-head { margin-bottom: 28px; }
+.demo-frame { max-width: 920px; margin-inline: auto; background: var(--band); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.demo-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; }
+.demo-note { max-width: 920px; margin: 12px auto 0; font-size: 13.5px; color: var(--muted); }
+
+/* industries */
+.industries { background: var(--surface); border-block: 1px solid var(--line); }
+.section-head { max-width: 720px; margin-bottom: 40px; }
+.section-head h2 { font-size: clamp(30px, 4vw, 44px); margin-bottom: 14px; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.cell { padding: 26px 26px 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg); }
+.cell:nth-child(3n) { border-right: 0; }
+.cell:nth-last-child(-n+3) { border-bottom: 0; }
+.cell h3 { font-size: 21px; margin-bottom: 10px; }
+.cell p { color: var(--muted); font-size: 15.5px; }
+.cell .tag { display: inline-block; margin-top: 14px; font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+@media (max-width: 880px) {
+  .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .cell:nth-child(3n) { border-right: 1px solid var(--line); }
+  .cell:nth-child(2n) { border-right: 0; }
+  .cell:nth-last-child(-n+3) { border-bottom: 1px solid var(--line); }
+  .cell:nth-last-child(-n+2) { border-bottom: 0; }
+}
+@media (max-width: 560px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .cell, .cell:nth-child(2n), .cell:nth-child(3n) { border-right: 0; }
+  .cell, .cell:nth-last-child(-n+3), .cell:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .cell:last-child { border-bottom: 0; }
+}
+
+/* how it works + included */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; }
+@media (max-width: 880px) { .two { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; counter-reset: step; }
+.steps li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; counter-increment: step; }
+.steps li::before { content: counter(step); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--accent); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.steps h3 { font-size: 20px; margin-bottom: 4px; }
+.steps p { color: var(--muted); font-size: 16px; }
+.included { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.included li { display: grid; gap: 2px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.included b { font-family: var(--font-display); font-size: 19px; font-weight: 500; }
+.included span { color: var(--muted); font-size: 15.5px; }
+
+/* pilot */
+.pilot { background: var(--band); color: var(--band-ink); }
+.pilot .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.pilot h2 { font-size: clamp(30px, 4vw, 44px); margin-bottom: 14px; }
+.pilot p { font-size: 18px; max-width: 56ch; opacity: 0.92; }
+.pilot .btn { justify-self: start; }
+@media (max-width: 880px) { .pilot .wrap { grid-template-columns: minmax(0, 1fr); } }
+
+/* promises */
+.promises { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.promises div { border-top: 2px solid var(--ink); padding-top: 16px; }
+.promises h3 { font-size: 19px; margin-bottom: 8px; }
+.promises p { color: var(--muted); font-size: 15.5px; }
+@media (max-width: 880px) { .promises { grid-template-columns: minmax(0, 1fr); } }
+
+/* faq */
+details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+details:first-of-type { border-top: 1px solid var(--line); }
+summary { cursor: pointer; font-family: var(--font-display); font-size: 20px; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--font-mono); color: var(--accent); }
+details[open] summary::after { content: "–"; }
+details p { margin-top: 10px; color: var(--muted); max-width: 70ch; }
+
+/* contact */
+.contact { background: var(--surface); border-top: 1px solid var(--line); }
+form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; max-width: 760px; }
+.field { display: grid; gap: 6px; }
+.field.full { grid-column: 1 / -1; }
+label { font-size: 14px; font-weight: 600; }
+input, select, textarea {
+  font: 400 16px var(--font-body); color: var(--ink); background: var(--bg);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 11px 13px; width: 100%; min-width: 0;
+}
+textarea { min-height: 110px; resize: vertical; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.form-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+#form-status { font-size: 15px; color: var(--muted); }
+#form-status.error { color: #B3261E; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #form-status.error { color: #FF8A80; } }
+:root[data-theme="dark"] #form-status.error { color: #FF8A80; }
+@media (max-width: 640px) { form { grid-template-columns: minmax(0, 1fr); } }
+.direct { margin-top: 28px; font-size: 15.5px; color: var(--muted); display: grid; gap: 4px; text-align: center; }
+.direct strong { color: var(--ink); font-weight: 600; }
+
+/* form feedback */
+.notice { grid-column: 1 / -1; padding: 14px 16px; border-radius: 12px; font-size: 16px; font-weight: 500; border: 1.5px solid #B3261E; background: #FDECEA; color: #7A1712; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .notice { background: #3A1512; color: #FFB4AB; border-color: #FF8A80; } }
+:root[data-theme="dark"] .notice { background: #3A1512; color: #FFB4AB; border-color: #FF8A80; }
+.thanks { max-width: 760px; padding: 32px 28px; border-radius: 18px; border: 2px solid var(--accent); background: var(--soft); display: grid; gap: 10px; justify-items: start; }
+.thanks:focus { outline: none; }
+.thanks .tick { width: 56px; height: 56px; border-radius: 50%; background: var(--cta); display: grid; place-items: center; }
+.thanks .tick svg { width: 30px; height: 30px; stroke: var(--cta-ink); }
+.thanks h3 { font-size: clamp(26px, 3.4vw, 34px); }
+.thanks p { font-size: 18px; color: var(--ink); max-width: 56ch; }
+.thanks .sub { font-size: 15px; color: var(--muted); }
+.thanks .btn { margin-top: 8px; }
+@media (prefers-reduced-motion: no-preference) { .thanks { animation: pop .45s ease-out; } @keyframes pop { from { transform: scale(.97); opacity: 0; } to { transform: none; opacity: 1; } } }
+
+/* claims dialog + footer link */
+.linklike { background: none; border: 0; padding: 0; font: inherit; color: var(--muted); text-decoration: underline; cursor: pointer; }
+.linklike:hover { color: var(--ink); }
+dialog#claims { border: 1px solid var(--line); border-radius: 16px; padding: 0; width: min(680px, calc(100vw - 32px)); max-height: min(80vh, 720px); background: var(--surface); color: var(--ink); }
+dialog#claims::backdrop { background: rgba(20, 14, 10, .55); }
+dialog#claims .dlg-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); }
+dialog#claims h2 { font-size: 22px; }
+dialog#claims .dlg-body { padding: 8px 22px 22px; overflow: auto; font-size: 15px; }
+dialog#claims h3 { font-size: 16px; margin: 20px 0 8px; }
+dialog#claims ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; color: var(--muted); }
+dialog#claims li b { color: var(--ink); font-weight: 600; }
+dialog#claims .intro { color: var(--muted); margin-top: 14px; }
+.chip { display: inline-block; font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); margin-right: 6px; }
+.chip.ok { color: #166534; background: #DCFCE7; border-color: #86EFAC; }
+.chip.plan { color: var(--accent); background: var(--soft); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chip.ok { color: #86EFAC; background: #0F2A18; border-color: #1F5A33; } }
+:root[data-theme="dark"] .chip.ok { color: #86EFAC; background: #0F2A18; border-color: #1F5A33; }
+
+footer { padding-block: 32px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-align: center; gap: 8px 24px; }
+</style>
+
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Hellora home">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--accent)"/>
+        <path d="M10 17c2.5 4 9.5 4 12 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color: var(--accent)"/>
+        <circle cx="11.5" cy="12" r="1.8" fill="currentColor" style="color: var(--accent)"/>
+        <circle cx="20.5" cy="12" r="1.8" fill="currentColor" style="color: var(--accent)"/>
+      </svg>
+      Hellora
+    </a>
+    <nav>
+      <a class="link" href="#industries">Who it's for</a>
+      <a class="link" href="#how">How it works</a>
+      <a class="link" href="#faq">Questions</a>
+      <a class="btn" href="#contact">Start a free pilot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">AI phone receptionist for local business</p>
+        <h1>Every call answered. Every booking made.</h1>
+        <p class="lede">Hellora picks up your business line, answers questions, books appointments or takes orders, and sends your team a summary of every call. It works while you are with a customer, closed for the night, or on the other line.</p>
+        <div class="cta">
+          <a class="btn" href="#contact">Start a free pilot</a>
+          <a class="btn ghost" href="#how">See how it works</a>
+        </div>
+        <p class="fine">Built in Clarington, Ontario for Canadian businesses. You keep your phone number.</p>
+        <p class="fine" id="demo-line" hidden>Hear it yourself: call <strong id="demo-number"></strong></p>
+      </div>
+
+      <div class="call" aria-label="Example call">
+        <div class="call-top">
+          <span class="live"><span class="dot" aria-hidden="true"></span> Example call</span>
+          <span id="call-meta">00:48</span>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Example call by industry" id="tabs"></div>
+        <div class="transcript" id="transcript" aria-live="polite"></div>
+        <div class="result" id="result"></div>
+        <p class="call-note">Illustrative example written by Hellora. Not a recording of a real caller.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" id="demo">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">See it in action</p>
+        <h2>From the ring to the booking, in under a minute.</h2>
+        <p class="lede">A walkthrough of what happens after a call: the booking, the alert to your team and the call summary.</p>
+      </div>
+      <div class="demo-frame">
+        <video controls playsinline preload="none" poster="/hellora-demo-poster.jpg" aria-label="Hellora demo: a caller phones a business, Hellora books the appointment, and the team gets an alert and an emailed summary">
+          <source src="/hellora-demo.mp4" type="video/mp4">
+          Your browser can't play this video.
+        </video>
+      </div>
+      <p class="demo-note">An illustration with a fictional business and caller. It is not a screen you log in to: bookings go to your calendar, alerts and summaries come by email or chat. Music and on-screen text, no speech.</p>
+    </div>
+  </section>
+
+  <section class="industries" id="industries">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Who it's for</p>
+        <h2>If customers phone you, Hellora can answer.</h2>
+        <p class="lede">One receptionist, set up around your hours, services and rules. We start with a handful of local businesses and add trades as we learn what each one needs.</p>
+      </div>
+      <div class="grid">
+        <div class="cell"><h3>Clinics and dental</h3><p>Books checkups and cleanings into your calendar, answers hours and location, and passes urgent calls to your team. It never gives medical advice.</p><span class="tag">appointments</span></div>
+        <div class="cell"><h3>Restaurants and pizza</h3><p>Takes pickup and delivery orders by phone, repeats them back, and sends the order to your team by text or email. A direct link to your POS can be added per store.</p><span class="tag">orders</span></div>
+        <div class="cell"><h3>Car dealerships</h3><p>Notes the vehicle a caller asks about, books test drives and service visits, and hands buyers who are ready to your sales team.</p><span class="tag">test drives, service</span></div>
+        <div class="cell"><h3>Real estate</h3><p>Answers showing requests, asks buyers and renters a few qualifying questions, and books viewings around your agents' calendars.</p><span class="tag">viewings, leads</span></div>
+        <div class="cell"><h3>Home services</h3><p>HVAC, plumbing, water heaters. Collects the problem, address and urgency, books the visit, and flags emergencies to your on-call person.</p><span class="tag">quotes, dispatch</span></div>
+        <div class="cell"><h3>Salons and everyone else</h3><p>Appointments, common questions, messages. If your phone rings and the same ten questions come up, we can build it.</p><span class="tag">anything with a phone</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap two">
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2 style="font-size: clamp(30px, 4vw, 44px); margin-bottom: 28px;">Live in days, not months.</h2>
+        <ol class="steps">
+          <li><div><h3>Tell us about your business</h3><p>Hours, services, what callers ask, which prices you want shared, and what counts as urgent.</p></div></li>
+          <li><div><h3>We build and test it</h3><p>We set up your receptionist, connect your calendar and run test calls with you until it sounds right.</p></div></li>
+          <li><div><h3>Forward your calls</h3><p>Send your business line to Hellora, or only the calls you miss. You keep your number and can switch it off any time.</p></div></li>
+        </ol>
+      </div>
+      <div>
+        <p class="eyebrow">On every call</p>
+        <h2 style="font-size: clamp(30px, 4vw, 44px); margin-bottom: 28px;">What you get back.</h2>
+        <ul class="included">
+          <li><b>A booked appointment or a taken order</b><span>Written to your calendar, or sent to your team, while the caller is still on the line.</span></li>
+          <li><b>A summary in your inbox</b><span>Who called, what they wanted, what happened, and what needs a human.</span></li>
+          <li><b>Transcript and recording</b><span>Review any call. Callers are told it may be recorded.</span></li>
+          <li><b>Handoff to a person</b><span>For the calls you choose, or when a caller asks for one.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pilot">
+    <div class="wrap">
+      <div>
+        <h2>Try it free for a week.</h2>
+        <p>We are setting up our first local businesses now. Tell us what your phone line looks like and we will build a receptionist for it, run it alongside your team for seven days, and show you every call. Monthly pricing comes after the pilot, based on your call volume, and we quote it before you commit to anything.</p>
+      </div>
+      <a class="btn" href="#contact">Request a pilot</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Ground rules</p>
+        <h2>Built to be upfront with your customers.</h2>
+      </div>
+      <div class="promises">
+        <div><h3>Callers know it's an AI</h3><p>Every call opens by saying it is a virtual assistant and that the call may be recorded.</p></div>
+        <div><h3>No advice, no guessing</h3><p>It does not give medical, legal or financial advice, and it does not invent prices or answers. When it is unsure it takes a message.</p></div>
+        <div><h3>Your number stays yours</h3><p>You forward calls to us. Turn forwarding off and you are back to how things were.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Questions</p>
+        <h2>What owners ask first.</h2>
+      </div>
+      <details><summary>What happens when it can't answer something?</summary><p>It says so, takes the caller's name, number and reason, and sends the message to your team straight away. It does not make something up.</p></details>
+      <details><summary>Does it work with my phone system?</summary><p>If your business line can forward calls, it works. That covers most landlines, VoIP services and mobile numbers.</p></details>
+      <details><summary>Can it connect to my POS, CRM or booking software?</summary><p>Calendar booking works from day one. Other systems such as a POS or CRM depend on what they allow, so we check each one with you before promising it.</p></details>
+      <details><summary>What does it cost after the pilot?</summary><p>A monthly fee based on how many calls you get, plus a one-time setup. We give you the number in writing before you decide.</p></details>
+      <details><summary>Is it right for a healthcare practice?</summary><p>For booking and general questions, yes. We keep health details off the call: it collects a name, phone number and appointment type, and it sends anything clinical to your staff.</p></details>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Start a pilot</p>
+        <h2>Tell us about your phone line.</h2>
+        <p class="lede">A few details are enough. We will get back to you soon.</p>
+      </div>
+      <form id="lead-form" novalidate>
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-biz">Business name</label><input id="f-biz" name="business" autocomplete="organization" required></div>
+        <div class="field"><label for="f-type">Type of business</label>
+          <select id="f-type" name="type" required>
+            <option value="">Choose one</option>
+            <option>Clinic or dental office</option>
+            <option>Restaurant or pizza shop</option>
+            <option>Car dealership</option>
+            <option>Real estate</option>
+            <option>Home services (HVAC, plumbing, etc.)</option>
+            <option>Salon or personal care</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-contact">Email or phone</label><input id="f-contact" name="contact" autocomplete="email" required></div>
+        <div class="field full"><label for="f-msg">What do callers usually ask for? (optional)</label><textarea id="f-msg" name="message"></textarea></div>
+        <div class="form-foot">
+          <button class="btn" type="submit" id="f-submit">Request a pilot</button>
+          <span id="form-status" role="status"></span>
+        </div>
+        <div class="notice" id="form-alert" role="alert" hidden></div>
+      </form>
+      <div class="thanks" id="thanks" role="status" tabindex="-1" hidden>
+        <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h3 id="thanks-title">Thank you. Your request is in.</h3>
+        <p id="thanks-body">We've received your details and will get back to you soon.</p>
+        <p class="sub">Nothing else is needed from you. Check your inbox (and spam folder) for our reply.</p>
+        <button class="btn ghost" type="button" id="thanks-again">Send another request</button>
+      </div>
+      <div class="direct" id="direct" hidden>
+        <span><strong>Email</strong> <span id="direct-email"></span></span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Hellora</span>
+    <span id="corp-line" hidden></span>
+    <button type="button" class="linklike" id="claims-open">Claims and availability</button>
+  </div>
+</footer>
+
+<dialog id="claims" aria-labelledby="claims-title">
+  <div class="dlg-head"><h2 id="claims-title">Claims and availability</h2><button type="button" class="btn ghost" id="claims-close" style="min-height:38px;padding:0 16px">Close</button></div>
+  <div class="dlg-body">
+    <p class="intro">Hellora is an early-stage service. This page describes what it does today and what is planned, so you know what to expect.</p>
+    <h3><span class="chip ok">Working today</span> in our proofs of concept</h3>
+    <ul>
+      <li><b>Answers calls with an AI voice</b> and tells callers it is an AI assistant.</li>
+      <li><b>Books appointments</b> into a connected calendar while the caller is on the line.</li>
+      <li><b>Takes pickup orders</b> by voice, repeats them back and says the total with tax.</li>
+      <li><b>Alerts the business</b> when a booking or order is made, by email and chat message.</li>
+      <li><b>Emails a summary</b> of each call.</li>
+      <li><b>Learns the business</b> (hours, services, FAQs) from its website.</li>
+    </ul>
+    <h3><span class="chip plan">Planned</span> not available yet</h3>
+    <ul>
+      <li><b>Handoff to a person:</b> passing a call to your staff live.</li>
+      <li><b>A client dashboard or portal:</b> there is none yet. Clients receive emails and alerts.</li>
+      <li><b>Transcript and recording access for clients:</b> calls are recorded by our phone platform, but there is no viewer for clients yet.</li>
+      <li><b>Text-message (SMS) alerts and confirmations.</b></li>
+      <li><b>Direct link to your point-of-sale or online store</b> for orders.</li>
+      <li><b>Additional languages</b> beyond English.</li>
+    </ul>
+    <h3>Industries</h3>
+    <ul>
+      <li>Dental and clinic booking and pizza ordering are the two we have built and tested.</li>
+      <li>Car dealerships, real estate, home services, salons and others describe what we plan to build for each. We will confirm what is ready before you start.</li>
+    </ul>
+    <h3>Timing and pricing</h3>
+    <ul>
+      <li>"Live in days, not months" is our goal for a typical setup, not a guarantee. We confirm a timeline with you first.</li>
+      <li>Pricing is confirmed in writing before you commit.</li>
+    </ul>
+    <h3>Privacy and recording</h3>
+    <ul>
+      <li>Callers are told the call may be recorded and that they are speaking with an AI assistant.</li>
+      <li>For healthcare, the assistant collects only a name, phone number and appointment type. It does not give medical advice.</li>
+    </ul>
+  </div>
+</dialog>
+
+<script>
+/* Fill these in before going live. Anything left empty stays hidden. */
+var CONFIG = {
+  email: 'hello@hellora.ca',  // public contact email
+  demoPhone: '',      // optional public demo line, e.g. (431) 555-0100
+  corpName: '',       // legal corporation name shown in the footer, e.g. 1234567 Canada Inc.
+  formEndpoint: 'https://n8n.srv1888501.hstgr.cloud/webhook/hellora-lead'    // n8n webhook URL that receives the form as JSON (works once hosted on your own domain)
+};
+
+var CALLS = {
+  'Dental': {
+    meta: '00:48',
+    lines: [
+      ['Caller', 'Hi, can I book a cleaning for tomorrow morning?'],
+      ['Hellora', 'Of course. Are you a new or existing patient?'],
+      ['Caller', 'Existing. Maria Santos.'],
+      ['Hellora', 'Thanks, Maria. I have 9:30 or 10:00 tomorrow. Which works better?'],
+      ['Caller', '10 is perfect.']
+    ],
+    result: ['Booked', 'Cleaning · tomorrow 10:00 · Maria Santos · summary emailed to the clinic']
+  },
+  'Pizza': {
+    meta: '01:12',
+    lines: [
+      ['Caller', 'Can I get a large pepperoni and a Caesar salad for pickup?'],
+      ['Hellora', 'Sure. One large pepperoni and one Caesar salad for pickup. Anything to drink?'],
+      ['Caller', 'No, that is it.'],
+      ['Hellora', 'Your name and a phone number for the order?'],
+      ['Caller', 'Dev, 905 555 0142.']
+    ],
+    result: ['Order sent', 'Large pepperoni, Caesar salad · pickup · Dev · text sent to the kitchen']
+  },
+  'Dealership': {
+    meta: '00:57',
+    lines: [
+      ['Caller', 'Is the blue Civic on your website still available?'],
+      ['Hellora', 'I can take your details so a salesperson confirms that today. Would you like to book a test drive too?'],
+      ['Caller', 'Yes, Saturday if possible.'],
+      ['Hellora', 'I have Saturday at 11:00 or 1:30.'],
+      ['Caller', '11 works.']
+    ],
+    result: ['Test drive booked', 'Civic enquiry · Saturday 11:00 · lead passed to sales']
+  },
+  'Real estate': {
+    meta: '01:03',
+    lines: [
+      ['Caller', 'I saw the listing on Elm Street. Can I see it this week?'],
+      ['Hellora', 'Yes. Are you buying, and have you spoken with a lender yet?'],
+      ['Caller', 'Buying, and I am pre-approved.'],
+      ['Hellora', 'Great. The agent has Thursday at 5:00 or Friday at noon.'],
+      ['Caller', 'Thursday.']
+    ],
+    result: ['Viewing booked', 'Elm Street · Thursday 17:00 · pre-approved buyer · agent notified']
+  },
+  'HVAC': {
+    meta: '01:20',
+    lines: [
+      ['Caller', 'My water heater is leaking in the basement.'],
+      ['Hellora', 'I am sorry to hear that. Is water spreading right now, and can you reach the shut-off valve?'],
+      ['Caller', 'It is spreading. I will shut it off.'],
+      ['Hellora', 'Good. I am marking this urgent and sending it to the on-call technician now. What is the address?']
+    ],
+    result: ['Urgent', 'Water heater leak · address captured · on-call technician alerted by text']
+  }
+};
+
+(function () {
+  var tabsEl = document.getElementById('tabs');
+  var transcriptEl = document.getElementById('transcript');
+  var resultEl = document.getElementById('result');
+  var metaEl = document.getElementById('call-meta');
+  var names = Object.keys(CALLS);
+
+  function show(name) {
+    var call = CALLS[name];
+    transcriptEl.textContent = '';
+    call.lines.forEach(function (l) {
+      var row = document.createElement('div');
+      row.className = 'line ' + (l[0] === 'Hellora' ? 'ai' : 'caller');
+      var who = document.createElement('span');
+      who.className = 'who';
+      who.textContent = l[0];
+      var txt = document.createElement('span');
+      txt.textContent = l[1];
+      row.appendChild(who);
+      row.appendChild(txt);
+      transcriptEl.appendChild(row);
+    });
+    resultEl.textContent = '';
+    var b = document.createElement('b');
+    b.textContent = call.result[0];
+    var s = document.createElement('span');
+    s.textContent = call.result[1];
+    resultEl.appendChild(b);
+    resultEl.appendChild(s);
+    metaEl.textContent = call.meta;
+    Array.prototype.forEach.call(tabsEl.children, function (t) {
+      t.setAttribute('aria-selected', t.dataset.name === name ? 'true' : 'false');
+    });
+  }
+
+  names.forEach(function (name) {
+    var t = document.createElement('button');
+    t.type = 'button';
+    t.className = 'tab';
+    t.setAttribute('role', 'tab');
+    t.dataset.name = name;
+    t.textContent = name;
+    t.addEventListener('click', function () { show(name); });
+    tabsEl.appendChild(t);
+  });
+  show(names[0]);
+
+  if (CONFIG.demoPhone) {
+    document.getElementById('demo-number').textContent = CONFIG.demoPhone;
+    document.getElementById('demo-line').hidden = false;
+  }
+  if (CONFIG.email) {
+    document.getElementById('direct-email').textContent = CONFIG.email;
+    document.getElementById('direct').hidden = false;
+  }
+  if (CONFIG.corpName) {
+    var c = document.getElementById('corp-line');
+    c.textContent = 'Hellora is a trade name of ' + CONFIG.corpName;
+    c.hidden = false;
+  }
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  var form = document.getElementById('lead-form');
+  var status = document.getElementById('form-status');
+  var alertBox = document.getElementById('form-alert');
+  var thanks = document.getElementById('thanks');
+  var btn = document.getElementById('f-submit');
+
+  function setStatus(msg) { status.textContent = msg; }
+  function showAlert(msg) { alertBox.textContent = msg; alertBox.hidden = !msg; if (msg) { alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }
+
+  document.getElementById('thanks-again').addEventListener('click', function () {
+    thanks.hidden = true; form.hidden = false; form.name.focus();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    showAlert('');
+    var data = {
+      name: form.name.value.trim(),
+      business: form.business.value.trim(),
+      type: form.type.value,
+      contact: form.contact.value.trim(),
+      message: form.message.value.trim(),
+      source: 'hellora-website'
+    };
+    if (!data.name || !data.business || !data.type || !data.contact) {
+      showAlert('Please fill in your name, business, type of business and a way to reach you.');
+      return;
+    }
+    if (!CONFIG.formEndpoint) {
+      showAlert('This form is not connected yet, so nothing was sent.');
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    setStatus('Sending your request…');
+    fetch(CONFIG.formEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (r) {
+      if (!r.ok) throw new Error('bad status');
+      var first = data.name.split(' ')[0];
+      document.getElementById('thanks-title').textContent = 'Thank you, ' + first + '. Your request is in.';
+      document.getElementById('thanks-body').textContent = 'We have received your details for ' + data.business + '. We will get back to you soon at ' + data.contact + '.';
+      form.reset();
+      form.hidden = true;
+      thanks.hidden = false;
+      thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      thanks.focus({ preventScroll: true });
+    }).catch(function () {
+      showAlert('Something went wrong and your request was not sent. Please try again in a minute, or email ' + (CONFIG.email || 'us') + '.');
+    }).then(function () { btn.disabled = false; btn.textContent = 'Request a pilot'; setStatus(''); });
+  });
+
+  var dlg = document.getElementById('claims');
+  document.getElementById('claims-open').addEventListener('click', function () { if (dlg.showModal) { dlg.showModal(); } else { dlg.setAttribute('open', ''); } });
+  document.getElementById('claims-close').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (ev) { if (ev.target === dlg) { dlg.close(); } });
+})();
+</script>
+
+</body>
+</html>
