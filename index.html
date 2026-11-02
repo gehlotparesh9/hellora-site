@@ -3,12 +3,112 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Hellora is an AI phone receptionist for local businesses. It answers calls, books appointments and takes orders.">
+<meta name="description" content="Hellora is an AI phone receptionist that answers every call, books appointments into your calendar and takes orders, day and night, for clinics, restaurants, salons and more.">
+<link rel="canonical" href="https://hellora.ca/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hellora">
+<meta property="og:title" content="Hellora | AI Phone Receptionist for Call Answering and Booking">
+<meta property="og:description" content="Every call answered, every booking made. Hellora picks up your business line, books appointments, takes orders and sends your team a summary.">
+<meta property="og:url" content="https://hellora.ca/">
+<meta property="og:image" content="https://hellora.ca/hellora-demo-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hellora | AI Phone Receptionist for Call Answering and Booking">
+<meta name="twitter:description" content="Every call answered, every booking made. Hellora picks up your business line, books appointments, takes orders and sends your team a summary.">
+<meta name="twitter:image" content="https://hellora.ca/hellora-demo-poster.jpg">
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://hellora.ca/#org",
+   "name": "Hellora",
+   "url": "https://hellora.ca/",
+   "logo": "https://hellora.ca/icon-512.png",
+   "email": "hello@hellora.ca"
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://hellora.ca/#site",
+   "url": "https://hellora.ca/",
+   "name": "Hellora",
+   "publisher": {
+    "@id": "https://hellora.ca/#org"
+   },
+   "inLanguage": "en"
+  },
+  {
+   "@type": "Service",
+   "@id": "https://hellora.ca/#service",
+   "name": "Hellora AI phone receptionist",
+   "serviceType": "AI phone answering, appointment booking and phone order taking",
+   "provider": {
+    "@id": "https://hellora.ca/#org"
+   },
+   "areaServed": "Worldwide",
+   "description": "An AI receptionist that answers a business phone line, books appointments into the calendar, takes orders and sends the team a summary of every call."
+  },
+  {
+   "@type": "VideoObject",
+   "name": "Hellora demo: from the ring to the booking",
+   "description": "A walkthrough of what happens after a call: the booking, the alert to the team and the call summary.",
+   "thumbnailUrl": "https://hellora.ca/hellora-demo-poster.jpg",
+   "contentUrl": "https://hellora.ca/hellora-demo.mp4",
+   "uploadDate": "2026-11-01"
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://hellora.ca/#faq",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "What happens when it can't answer something?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It says so, takes the caller's name, number and reason, and sends the message to your team straight away. It does not make something up."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Does it work with my phone system?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "If your business line can forward calls, it works. That covers most landlines, VoIP services and mobile numbers."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can it connect to my POS, CRM or booking software?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Calendar booking works from day one. Other systems such as a POS or CRM depend on what they allow, so we check each one with you before promising it."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What does it cost after the pilot?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "A monthly fee based on how many calls you get, plus a one-time setup. We give you the number in writing before you decide."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is it right for a healthcare practice?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "For booking and general questions, yes. We keep health details off the call: it collects a name, phone number and appointment type, and it sends anything clinical to your staff."
+     }
+    }
+   ]
+  }
+ ]
+}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#F97316">
-<title>Hellora</title>
+<title>Hellora | AI Phone Receptionist for Call Answering and Booking</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -286,7 +386,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
           <a class="btn" href="#contact">Start a free pilot</a>
           <a class="btn ghost" href="#how">See how it works</a>
         </div>
-        <p class="fine">Built for Canadian businesses. You keep your phone number.</p>
+        <p class="fine">You keep your phone number and can switch it off any time.</p>
         <p class="fine" id="demo-line" hidden>Hear it yourself: call <strong id="demo-number"></strong></p>
       </div>
 
