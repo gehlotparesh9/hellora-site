@@ -3,126 +3,189 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hot water tank enquiry | Sample page</title>
+<title>Request a call back | Hellora demo</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0F4C81">
+<meta name="theme-color" content="#F97316">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Demo lead page. Everything a customer would change is in CONFIG at the bottom of this file. */
-:root { --accent: #0F4C81; --accent-ink: #FFFFFF; --bg: #F5F7FA; --surface: #FFFFFF; --ink: #17212B; --muted: #5A6775; --line: #DCE2E9; --ok: #1B7F4B; --bad: #B3261E; }
+/* Hellora demo lead page. Same tokens as hellora.ca. Customer-specific text is in CONFIG at the bottom. */
+:root {
+  --bg: #FBFAF9; --surface: #FFFFFF; --ink: #1F1A17; --muted: #5C524B; --line: #E8E2DD;
+  --accent: #C2410C; --accent-ink: #FFFFFF; --soft: #FDEEE3; --signal: #EA580C;
+  --cta: #F97316; --cta-ink: #1A0B00; --band: #1F1A17; --band-ink: #FFF7F0;
+  --ok: #15803D; --bad: #B42318; --bad-bg: #FEECEA;
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14100D; --surface: #1D1713; --ink: #F7F1EC; --muted: #B5A79C; --line: #342B24;
+    --accent: #FB923C; --accent-ink: #1A0B00; --soft: #2B1B10; --signal: #FB923C;
+    --cta: #FB923C; --cta-ink: #1A0B00; --band: #2A211B; --band-ink: #FFF7F0;
+    --ok: #4ADE80; --bad: #FCA5A5; --bad-bg: #3A1A17;
+    color-scheme: dark;
+  }
+}
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
-.demo-bar { background: #1F1A17; color: #FBFAF9; font-size: 14px; text-align: center; padding: 10px 16px; }
-.demo-bar a { color: #FDBA74; }
-header.site { background: var(--surface); border-bottom: 1px solid var(--line); }
-.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
-header.site .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 16px; }
-.brand { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; color: var(--accent); }
-.phone { color: var(--muted); font-size: 15px; }
-main .wrap { display: grid; grid-template-columns: 1fr; gap: 32px; padding-top: 40px; padding-bottom: 56px; }
-@media (min-width: 880px) { main .wrap { grid-template-columns: 1.05fr 0.95fr; align-items: start; gap: 56px; padding-top: 64px; } }
-h1 { font-size: clamp(30px, 4.4vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 16px; }
-.lede { font-size: 18px; color: var(--muted); margin: 0 0 24px; max-width: 34em; }
-ul.points { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-ul.points li { padding-left: 28px; position: relative; }
-ul.points li::before { content: ""; position: absolute; left: 0; top: 7px; width: 14px; height: 8px; border-left: 3px solid var(--accent); border-bottom: 3px solid var(--accent); transform: rotate(-45deg); }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; box-shadow: 0 1px 2px rgba(15,30,50,.04), 0 8px 24px rgba(15,30,50,.06); }
-.card h2 { margin: 0 0 4px; font-size: 22px; }
-.card .sub { margin: 0 0 20px; color: var(--muted); font-size: 15px; }
-label { display: block; font-weight: 600; font-size: 14px; margin: 14px 0 6px; }
-input[type=text], input[type=tel], input[type=email], select, textarea { width: 100%; font: inherit; color: inherit; background: #fff; border: 1px solid #B9C3CE; border-radius: 8px; padding: 12px; min-height: 46px; }
-textarea { min-height: 96px; resize: vertical; }
-input:focus, select:focus, textarea:focus { outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent); border-color: var(--accent); }
-.hp { position: absolute; left: -9999px; height: 0; overflow: hidden; }
-.consent { font-weight: 400; display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 4px; font-size: 14px; color: var(--muted); }
-.consent input { margin-top: 4px; width: 18px; height: 18px; flex: none; }
-button.go { width: 100%; margin-top: 18px; min-height: 50px; border: 0; border-radius: 10px; background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 700; cursor: pointer; }
-button.go:hover { filter: brightness(1.08); }
-button.go[disabled] { opacity: .6; cursor: wait; }
-.alert { margin-top: 14px; padding: 12px 14px; border-radius: 8px; background: #FDECEA; color: var(--bad); font-size: 14px; }
-.thanks { text-align: center; padding: 16px 4px; }
-.thanks .tick { width: 56px; height: 56px; border-radius: 50%; background: var(--ok); color: #fff; display: grid; place-items: center; font-size: 30px; margin: 0 auto 14px; }
-.thanks h2 { font-size: 26px; margin-bottom: 8px; }
 [hidden] { display: none !important; }
-footer { border-top: 1px solid var(--line); background: var(--surface); }
-footer .wrap { padding-top: 20px; padding-bottom: 28px; color: var(--muted); font-size: 13px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+h1, h2 { font-family: var(--font-display); line-height: 1.12; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 24px; text-decoration: none; letter-spacing: -0.02em; }
+.brand svg { width: 28px; height: 28px; flex: none; }
+.pill { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: var(--soft); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+
+.hero { padding-block: 24px 72px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+@media (max-width: 880px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
+.hero h1 { font-size: clamp(36px, 5.2vw, 58px); font-weight: 700; margin-bottom: 20px; }
+.lede { color: var(--muted); font-size: 19px; max-width: 52ch; }
+ul.points { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 12px; }
+ul.points li { padding-left: 30px; position: relative; }
+ul.points li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 14px; height: 8px; border-left: 3px solid var(--signal); border-bottom: 3px solid var(--signal); transform: rotate(-45deg); }
+
+.steps { margin-top: 36px; padding: 18px 20px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; }
+.steps b { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.steps ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 15.5px; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.live { display: inline-flex; align-items: center; gap: 8px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--signal); }
+@media (prefers-reduced-motion: no-preference) { .dot { animation: pulse 1.8s ease-in-out infinite; } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } } }
+.card-body { padding: 22px 20px 24px; }
+.card h2 { font-size: 26px; margin-bottom: 6px; }
+.card .sub { color: var(--muted); font-size: 15.5px; margin-bottom: 8px; }
+label { display: block; font-weight: 600; font-size: 14.5px; margin: 16px 0 6px; }
+input[type=text], input[type=tel], input[type=email], select, textarea { width: 100%; font: 400 16px var(--font-body); color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; min-height: 48px; }
+textarea { min-height: 96px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.hp { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+.consent { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 0; font-weight: 400; font-size: 14px; color: var(--muted); }
+.consent input { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--cta); }
+.btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 50px; margin-top: 20px; padding: 0 22px; border-radius: 10px; background: var(--cta); color: var(--cta-ink); font: 600 16px var(--font-body); border: 0; cursor: pointer; }
+.btn:hover { filter: brightness(1.08); }
+.btn[disabled] { opacity: .65; cursor: wait; }
+.alert { margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: var(--bad-bg); color: var(--bad); font-size: 14.5px; }
+.thanks { text-align: center; padding: 28px 8px 20px; }
+.tick { width: 60px; height: 60px; border-radius: 50%; background: var(--ok); color: #fff; display: grid; place-items: center; font-size: 30px; margin: 0 auto 16px; }
+.thanks h2 { font-size: 28px; margin-bottom: 10px; }
+.thanks p { color: var(--muted); }
+.fine { margin-top: 14px; font-size: 12.5px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 22px 32px; font-size: 13.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
 </style>
 </head>
 <body>
-<div class="demo-bar" id="demoBar">Sample page for demonstration, built by <a href="https://hellora.ca/">Hellora</a>. Nothing here is a real business.</div>
-
-<header class="site">
+<header>
   <div class="wrap">
-    <span class="brand" id="brand">Sample Home Services</span>
-    <span class="phone" id="phoneLine"></span>
+    <a class="brand" href="https://hellora.ca/" aria-label="Hellora home">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--accent)"/>
+        <path d="M10 17c2.5 4 9.5 4 12 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color: var(--accent)"/>
+        <circle cx="11.5" cy="12" r="1.8" fill="currentColor" style="color: var(--accent)"/>
+        <circle cx="20.5" cy="12" r="1.8" fill="currentColor" style="color: var(--accent)"/>
+      </svg>
+      Hellora
+    </a>
+    <span class="pill">Live demo</span>
   </div>
 </header>
 
 <main>
-  <div class="wrap">
-    <section>
-      <h1 id="headline">Hot water tank not working?</h1>
-      <p class="lede" id="lede">Tell us what is going on and we will call you to understand the job, so your quote and visit are right the first time.</p>
-      <ul class="points" id="points"></ul>
-    </section>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" id="eyebrow">Sample enquiry page</p>
+        <h1 id="headline">Hot water tank not working?</h1>
+        <p class="lede" id="lede">Tell us what is going on and we will call you to understand the job, so your quote and visit are right the first time.</p>
+        <ul class="points" id="points"></ul>
+        <div class="steps">
+          <b>What happens next</b>
+          <ol>
+            <li>You send this form.</li>
+            <li>An AI assistant from Hellora phones you to ask a few questions.</li>
+            <li>It books a time for a one-to-one call and sends you the invite.</li>
+          </ol>
+        </div>
+      </div>
 
-    <section class="card" id="formCard">
-      <div id="formView">
-        <h2>Request a call back</h2>
-        <p class="sub">It takes about a minute. We call you, you do not have to wait on hold.</p>
-        <form id="leadForm" novalidate>
-          <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-          <label for="name">Your name</label>
-          <input id="name" name="name" type="text" autocomplete="name" required>
-          <label for="phone">Phone number</label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+1 555 123 4567" required>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-          <label for="topic" id="topicLabel">What do you need?</label>
-          <select id="topic" name="topic"></select>
-          <label for="message">Anything we should know? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
-          <textarea id="message" name="message"></textarea>
-          <label class="consent"><input type="checkbox" id="consent" name="consent"><span id="consentText"></span></label>
-          <button class="go" type="submit" id="submitBtn">Request a call back</button>
-          <div class="alert" id="formAlert" role="alert" hidden></div>
-        </form>
+      <div class="card" id="formCard">
+        <div class="card-top"><span class="live"><span class="dot" aria-hidden="true"></span> Enquiry form</span><span>about 1 minute</span></div>
+        <div class="card-body">
+          <div id="formView">
+            <h2>Request a call back</h2>
+            <p class="sub">We call you, so there is no waiting on hold.</p>
+            <form id="leadForm" novalidate>
+              <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+              <label for="phone">Phone number</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+1 555 123 4567" required>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+              <label for="topic" id="topicLabel">What do you need?</label>
+              <select id="topic" name="topic"></select>
+              <label for="message">Anything we should know? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+              <textarea id="message" name="message"></textarea>
+              <label class="consent"><input type="checkbox" id="consent" name="consent"><span id="consentText"></span></label>
+              <button class="btn" type="submit" id="submitBtn">Request a call back</button>
+              <div class="alert" id="formAlert" role="alert" hidden></div>
+            </form>
+            <p class="fine">Sample page for demonstration. Use your own number to see how the call works.</p>
+          </div>
+          <div class="thanks" id="thanksView" hidden role="status" tabindex="-1">
+            <div class="tick" aria-hidden="true">&#10003;</div>
+            <h2>Thank you. Your request is in.</h2>
+            <p>We will get back to you soon, and you may get a call from our assistant to go over the details.</p>
+          </div>
+        </div>
       </div>
-      <div class="thanks" id="thanksView" hidden role="status" tabindex="-1">
-        <div class="tick" aria-hidden="true">&#10003;</div>
-        <h2>Thank you. Your request is in.</h2>
-        <p id="thanksText">We will get back to you soon, and you may get a call from our assistant to go over the details.</p>
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </main>
 
-<footer><div class="wrap" id="footerText"></div></footer>
+<footer>
+  <div class="wrap">
+    <span id="footerText"></span>
+    <span><a href="https://hellora.ca/">Hellora, AI phone receptionist</a></span>
+  </div>
+</footer>
 
 <script>
 var CONFIG = {
   businessName: 'Sample Home Services',
-  accent: '#0F4C81',
-  phoneLine: '',
+  eyebrow: 'Sample enquiry page',
   headline: 'Hot water tank not working?',
   lede: 'Tell us what is going on and we will call you to understand the job, so your quote and visit are right the first time.',
   points: ['Replacements, repairs and flushes', 'Same-week visits in most cases', 'A clear quote before any work starts'],
   topicLabel: 'What do you need?',
   topics: ['Replace my hot water tank', 'Repair my hot water tank', 'Tankless water heater', 'No hot water, not sure why', 'Something else'],
-  // Who this call is on behalf of, passed to the voice assistant. Keep short.
+  // Passed to the voice assistant so it knows what kind of business it is calling for.
   industry: 'home services (hot water tanks)',
   // Public address of the n8n workflow that receives the form.
   endpoint: 'https://n8n.srv1888501.hstgr.cloud/webhook/hellora-demo-lead',
-  // Sample key, lets one workflow serve many demo pages. Change per customer page.
+  // Lets one workflow serve many demo pages. Change per customer page.
   site: 'leads-demo'
 };
 
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  document.documentElement.style.setProperty('--accent', CONFIG.accent);
   document.title = CONFIG.businessName + ' | Request a call back';
-  $('brand').textContent = CONFIG.businessName;
-  $('phoneLine').textContent = CONFIG.phoneLine;
+  $('eyebrow').textContent = CONFIG.eyebrow;
   $('headline').textContent = CONFIG.headline;
   $('lede').textContent = CONFIG.lede;
   $('topicLabel').textContent = CONFIG.topicLabel;
