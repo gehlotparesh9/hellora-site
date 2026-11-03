@@ -159,6 +159,11 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
     </div>
     <div class="list" id="list"></div>
   </div>
+  <div class="card panel" id="enq-panel" hidden>
+    <h2>Web enquiries</h2>
+    <p class="note" style="margin:0 0 8px">People who filled in your contact form, and what happened next.</p>
+    <div class="list" id="enq-list"></div>
+  </div>
 </main>
 
 <dialog id="detail" aria-labelledby="d-title">
@@ -205,6 +210,16 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
       var i = el('i', x.count ? '' : 'z'); i.style.height = x.count ? Math.max(6, Math.round(x.count / max * 80)) + 'px' : '3px'; b.appendChild(i);
       b.appendChild(el('small', '', x.day.slice(8)));
       b.title = x.day + ': ' + x.count; chart.appendChild(b);
+    });
+    var ep = $('enq-panel'), el2 = $('enq-list'); el2.textContent = '';
+    var enq = d.enquiries || []; ep.hidden = !enq.length;
+    enq.forEach(function (q) {
+      var r = el('div', 'row'); r.style.cursor = 'default';
+      r.appendChild(el('span', 'when', fmtWhen(q.created_at, d.timezone)));
+      var w = el('span', 'what'); w.appendChild(el('b', '', q.name || 'Unknown'));
+      w.appendChild(el('span', '', [q.topic, q.phone, q.email].filter(Boolean).join(' · '))); r.appendChild(w);
+      r.appendChild(el('span', 'tag ' + (/^Called/.test(q.status) ? 'booked' : 'other'), q.status || 'New'));
+      el2.appendChild(r);
     });
     var list = $('list'); list.textContent = '';
     var shown = d.calls.filter(function (c) { return state.filter === 'all' || c.outcome === state.filter; });
