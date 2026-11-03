@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Hellora is an AI phone receptionist that answers every call, books appointments into your calendar and takes orders, day and night, for clinics, restaurants, salons and more.">
+<meta name="description" content="Hellora is an AI phone receptionist that answers every call, books appointments and takes orders, and calls back web enquiries to qualify and book them. For clinics, restaurants, home services and more.">
 <link rel="canonical" href="https://hellora.ca/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website">
@@ -46,7 +46,7 @@
     "@id": "https://hellora.ca/#org"
    },
    "areaServed": "Worldwide",
-   "description": "An AI receptionist that answers a business phone line, books appointments into the calendar, takes orders and sends the team a summary of every call."
+   "description": "An AI receptionist that answers a business phone line, books appointments into the calendar, takes orders, follows up web enquiries by phone and sends the team a summary of every call."
   },
   {
    "@type": "VideoObject",
@@ -98,6 +98,22 @@
      "acceptedAnswer": {
       "@type": "Answer",
       "text": "For booking and general questions, yes. We keep health details off the call: it collects a name, phone number and appointment type, and it sends anything clinical to your staff."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What happens when someone fills in my contact form?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "With their consent, Hellora can phone them back, ask a few questions about what they need and book a time with your team. Each call is approved by you first during the pilot, and the caller can say stop at any time."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "I don't have a website. Can you set up a contact form for me?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We can build a simple enquiry page for your business on its own hellora.ca address, so people can reach you and Hellora can follow up. Ask us for a live demo."
      }
     }
    ]
@@ -432,8 +448,29 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
         <div class="cell"><h3>Restaurants and pizza</h3><p>Takes pickup and delivery orders by phone, repeats them back, and sends the order to your team by text or email. A direct link to your POS can be added per store.</p><span class="tag">orders</span></div>
         <div class="cell"><h3>Car dealerships</h3><p>Notes the vehicle a caller asks about, books test drives and service visits, and hands buyers who are ready to your sales team.</p><span class="tag">test drives, service</span></div>
         <div class="cell"><h3>Real estate</h3><p>Answers showing requests, asks buyers and renters a few qualifying questions, and books viewings around your agents' calendars.</p><span class="tag">viewings, leads</span></div>
-        <div class="cell"><h3>Home services</h3><p>HVAC, plumbing, water heaters. Collects the problem, address and urgency, books the visit, and flags emergencies to your on-call person.</p><span class="tag">quotes, dispatch</span></div>
+        <div class="cell"><h3>Home services</h3><p>HVAC, plumbing, water heaters. Collects the problem, address and urgency, books the visit, and flags emergencies to your on-call person. Can also call back customers who send a web enquiry.</p><span class="tag">quotes, dispatch</span></div>
         <div class="cell"><h3>Salons and everyone else</h3><p>Appointments, common questions, messages. If your phone rings and the same ten questions come up, we can build it.</p><span class="tag">anything with a phone</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="followup" id="followup">
+    <div class="wrap two">
+      <div>
+        <p class="eyebrow">Web enquiries</p>
+        <h2 style="font-size: clamp(30px, 4vw, 44px); margin-bottom: 16px;">Every web enquiry gets a call back.</h2>
+        <p class="lede" style="margin-bottom: 28px;">Hellora is not only for the phone line. When someone fills in your contact form, it can phone them, ask the right questions and book a time with your team, so a lead does not sit in an inbox.</p>
+        <ol class="steps">
+          <li><div><h3>A customer sends an enquiry</h3><p>Name, number and what they need, with a tick box agreeing to be called.</p></div></li>
+          <li><div><h3>You approve the call</h3><p>You get a message with the details and approve or decline in one tap.</p></div></li>
+          <li><div><h3>Hellora calls and books</h3><p>It says it is an AI assistant, asks a few questions and books a call with your team in the calendar.</p></div></li>
+        </ol>
+      </div>
+      <div>
+        <p class="eyebrow">No website? No problem.</p>
+        <h2 style="font-size: clamp(30px, 4vw, 44px); margin-bottom: 16px;">We can set up your contact page.</h2>
+        <p class="lede" style="margin-bottom: 20px;">If you do not have a site, we will build a simple enquiry page for your business on its own address, such as <b>yourbusiness.hellora.ca</b>. Share the link, add it to your social profiles or Google listing, and every enquiry that comes in can be followed up by Hellora.</p>
+        <a class="btn" href="#contact">Ask for a live demo</a>
       </div>
     </div>
   </section>
@@ -497,6 +534,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
       <details><summary>Can it connect to my POS, CRM or booking software?</summary><p>Calendar booking works from day one. Other systems such as a POS or CRM depend on what they allow, so we check each one with you before promising it.</p></details>
       <details><summary>What does it cost after the pilot?</summary><p>A monthly fee based on how many calls you get, plus a one-time setup. We give you the number in writing before you decide.</p></details>
       <details><summary>Is it right for a healthcare practice?</summary><p>For booking and general questions, yes. We keep health details off the call: it collects a name, phone number and appointment type, and it sends anything clinical to your staff.</p></details>
+      <details><summary>What happens when someone fills in my contact form?</summary><p>With their consent, Hellora can phone them back, ask a few questions about what they need and book a time with your team. Each call is approved by you first during the pilot, and the caller can say stop at any time.</p></details>
+      <details><summary>I don't have a website. Can you set up a contact form for me?</summary><p>Yes. We can build a simple enquiry page for your business on its own hellora.ca address, so people can reach you and Hellora can follow up. Ask us for a live demo.</p></details>
     </div>
   </section>
 
@@ -563,6 +602,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
       <li><b>Takes pickup orders</b> by voice, repeats them back and says the total with tax.</li>
       <li><b>Alerts the business</b> when a booking or order is made, by email and chat message.</li>
       <li><b>Emails a summary</b> of each call.</li>
+      <li><b>Follows up web enquiries by phone:</b> after you approve each call, it phones the person who filled in a contact form, asks a few questions and books a call with your team.</li>
       <li><b>Learns the business</b> (hours, services, FAQs) from its website.</li>
     </ul>
     <h3><span class="chip plan">Planned</span> not available yet</h3>
@@ -571,6 +611,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
       <li><b>A client dashboard or portal:</b> there is none yet. Clients receive emails and alerts.</li>
       <li><b>Transcript and recording access for clients:</b> calls are recorded by our phone platform, but there is no viewer for clients yet.</li>
       <li><b>Text-message (SMS) alerts and confirmations.</b></li>
+      <li><b>Automatic enquiry calls without approval,</b> and per-business contact pages for every client. Today the contact pages are built by us and each call is approved first.</li>
       <li><b>Direct link to your point-of-sale or online store</b> for orders.</li>
       <li><b>Additional languages</b> beyond English.</li>
     </ul>
