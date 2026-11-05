@@ -213,9 +213,9 @@ header{display:none}
   }
   tick(); timer = setInterval(tick, 1000);
   $('stay').addEventListener('click', function () { clearInterval(timer); $('count').textContent = ''; $('stay').hidden = true; });
-  if (q) {
+  function loadReceipt(tries) {
     fetch(API + q[1]).then(function (r) { return r.json(); }).then(function (j) {
-      if (!j.ok) return;
+      if (!j.ok) { if (tries < 3) setTimeout(function () { loadReceipt(tries + 1); }, 2000); return; }
       var money = 'C$' + Number(j.amount).toFixed(2);
       if (j.item) $('item').textContent = j.item;
       $('price').textContent = money;
@@ -226,6 +226,7 @@ header{display:none}
       $('box').hidden = false;
     }).catch(function () {});
   }
+  if (q) loadReceipt(0);
 })();
 </script>
 </body>
