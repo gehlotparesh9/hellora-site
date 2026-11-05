@@ -288,6 +288,20 @@ nav a.link:hover { color: var(--ink); }
 .included b { font-family: var(--font-display); font-size: 19px; font-weight: 500; }
 .included span { color: var(--muted); font-size: 15.5px; }
 
+
+/* demo calls */
+.callcards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.callcard { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.callcard h3 { font-size: 21px; }
+.callcard p { color: var(--muted); font-size: 15.5px; }
+.callcard audio { width: 100%; margin-top: 4px; }
+.callcard .tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.after { margin-top: 20px; background: var(--soft); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; }
+.after h3 { font-size: 18px; margin-bottom: 8px; }
+.after p { color: var(--ink); font-size: 16px; }
+.after small { display: block; margin-top: 10px; color: var(--muted); font-size: 14px; }
+.callnote { margin-top: 16px; color: var(--muted); font-size: 14.5px; max-width: 78ch; }
+@media (max-width: 760px) { .callcards { grid-template-columns: 1fr; } }
 /* pilot */
 .pilot { background: var(--band); color: var(--band-ink); }
 .pilot .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; align-items: center; }
@@ -398,6 +412,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
       Hellora
     </a>
     <nav>
+      <a class="link" href="#listen">Hear it</a>
       <a class="link" href="#industries">Who it's for</a>
       <a class="link" href="#how">How it works</a>
       <a class="link" href="#pricing">Pricing</a>
@@ -449,6 +464,36 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
         </video>
       </div>
       <p class="demo-note">An illustration with a fictional business and caller. It is not a screen you log in to: bookings go to your calendar, alerts and summaries come by email or chat. Music and on-screen text, no speech.</p>
+    </div>
+  </section>
+
+  <section id="listen">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Hear it</p>
+        <h2>Hear Hellora answer a call.</h2>
+        <p class="lede">Two demo calls, start to finish. Press play and listen to how it books an appointment and takes an order.</p>
+      </div>
+      <div class="callcards">
+        <div class="callcard">
+          <span class="tag">Dental office</span>
+          <h3>Booking a new patient</h3>
+          <p>A new patient asks for a checkup and cleaning. Hellora offers open times, takes the details and confirms.</p>
+          <audio controls preload="none" src="/demo/dental-appointment.mp3">Your browser does not support audio.</audio>
+        </div>
+        <div class="callcard">
+          <span class="tag">Pizza shop</span>
+          <h3>Taking a pickup order</h3>
+          <p>A caller asks about gluten-free crust, then places an order. Hellora reads it back with the total and gives a pickup time.</p>
+          <audio controls preload="none" src="/demo/pizza-order.mp3">Your browser does not support audio.</audio>
+        </div>
+      </div>
+      <div class="after">
+        <h3>And after the call, your team gets this</h3>
+        <p>&ldquo;A new patient, Daniel Brooks, booked a checkup and cleaning for tomorrow at 10:30 AM. The office confirmed his phone number and email and advised him to arrive 10 minutes early.&rdquo;</p>
+        <small>A summary like this arrives by email after every call, with the transcript and recording in your dashboard.</small>
+      </div>
+      <p class="callnote">These are demonstration calls. The business and the callers are fictional and both voices are AI, so no real customer is recorded.</p>
     </div>
   </section>
 
