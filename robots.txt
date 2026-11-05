@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /leads/
 Disallow: /app/
+Disallow: /payments/
 
 Sitemap: https://hellora.ca/sitemap.xml
