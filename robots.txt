@@ -4,5 +4,6 @@ Disallow: /leads/
 Disallow: /app/
 Disallow: /payments/
 Disallow: /c/
+Disallow: /thanks/
 
 Sitemap: https://hellora.ca/sitemap.xml
