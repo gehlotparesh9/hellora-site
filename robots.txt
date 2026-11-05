@@ -6,5 +6,6 @@ Disallow: /payments/
 Disallow: /c/
 Disallow: /thanks/
 Disallow: /start/
+Disallow: /pilot/
 
 Sitemap: https://hellora.ca/sitemap.xml
