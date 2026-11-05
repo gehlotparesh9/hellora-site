@@ -6,32 +6,23 @@
 <title>Request a call back</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F97316">
-<link rel="canonical" href="https://hellora.ca/c/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Serif+Display&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Shared customer page. Content comes from the hellora_pages table via n8n. */
+/* Shared customer page. Content comes from the hellora_pages table via n8n.
+   The template (look and layout) is chosen by the "template" column; see TEMPLATES in the script. */
 :root {
   --bg: #FBFAF9; --surface: #FFFFFF; --ink: #1F1A17; --muted: #5C524B; --line: #E8E2DD;
-  --accent: #C2410C; --accent-ink: #FFFFFF; --soft: #FDEEE3; --signal: #EA580C;
-  --cta: #F97316; --cta-ink: #1A0B00; --band: #1F1A17; --band-ink: #FFF7F0;
+  --accent: #C2410C; --soft: #FDEEE3; --cta: #F97316; --cta-ink: #1A0B00; --band: #1F1A17; --band-ink: #FFF7F0;
   --ok: #15803D; --bad: #B42318; --bad-bg: #FEECEA;
   --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #14100D; --surface: #1D1713; --ink: #F7F1EC; --muted: #B5A79C; --line: #342B24;
-    --accent: #FB923C; --accent-ink: #1A0B00; --soft: #2B1B10; --signal: #FB923C;
-    --cta: #FB923C; --cta-ink: #1A0B00; --band: #2A211B; --band-ink: #FFF7F0;
-    --ok: #4ADE80; --bad: #FCA5A5; --bad-bg: #3A1A17;
-    color-scheme: dark;
-  }
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --h-transform: none; --h-weight: 700; --radius: 16px;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -44,27 +35,42 @@ a { color: inherit; }
 .eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
 
 header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 24px; text-decoration: none; letter-spacing: -0.02em; }
-.brand svg { width: 28px; height: 28px; flex: none; }
+.biz { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
+.biz i { width: 14px; height: 14px; border-radius: 50%; background: var(--cta); flex: none; box-shadow: 0 0 0 4px var(--soft); }
 .pill { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: var(--soft); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
 
-.hero { padding-block: 24px 72px; }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: start; }
-@media (max-width: 880px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
-.hero h1 { font-size: clamp(36px, 5.2vw, 58px); font-weight: 700; margin-bottom: 20px; }
+.hero { position: relative; padding-block: 24px 72px; overflow: hidden; }
+.deco { position: absolute; inset: 0; background: var(--accent); opacity: 0.07; pointer-events: none; -webkit-mask-size: 36px 36px; mask-size: 36px 36px; }
+.hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+.lay-rev .hero .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+.lay-rev .intro { order: 2; }
+@media (max-width: 880px) { .hero .wrap, .lay-rev .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 36px; } .lay-rev .intro { order: 0; } }
+.lay-stack .hero .wrap, .lay-banner .hero .wrap { grid-template-columns: minmax(0, 1fr); max-width: 760px; gap: 32px; }
+.lay-stack.center .intro { text-align: center; }
+.lay-stack.center .intro .lede, .lay-stack.center ul.points { margin-inline: auto; }
+.lay-stack.center ul.points { justify-items: start; width: fit-content; }
+.lay-banner .intro { background: var(--band); color: var(--band-ink); border-radius: 20px; padding: clamp(24px, 5vw, 48px); }
+.lay-banner .intro .eyebrow, .lay-banner .intro .lede { color: var(--band-ink); opacity: .85; }
+.lay-banner .call { color: var(--band-ink); opacity: .9; }
+.lay-banner .call a { color: var(--band-ink); }
+.lay-banner .steps { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: var(--band-ink); }
+.lay-banner .steps b { color: var(--band-ink); }
+.hero h1 { font-size: clamp(34px, 5vw, 56px); font-weight: var(--h-weight); text-transform: var(--h-transform); margin-bottom: 20px; }
 .lede { color: var(--muted); font-size: 19px; max-width: 52ch; }
+.call { margin-top: 16px; font-size: 16px; color: var(--muted); }
+.call a { color: var(--accent); font-weight: 600; text-decoration: none; border-bottom: 1.5px solid currentColor; }
 ul.points { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 12px; }
 ul.points li { padding-left: 30px; position: relative; }
-ul.points li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 14px; height: 8px; border-left: 3px solid var(--signal); border-bottom: 3px solid var(--signal); transform: rotate(-45deg); }
-
-.steps { margin-top: 36px; padding: 18px 20px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; }
+ul.points li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 14px; height: 8px; border-left: 3px solid var(--cta); border-bottom: 3px solid var(--cta); transform: rotate(-45deg); }
+.lay-banner ul.points li::before { border-color: var(--cta); }
+.steps { text-align: left; margin-top: 32px; padding: 18px 20px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; }
 .steps b { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
 .steps ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 15.5px; }
 
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
 .live { display: inline-flex; align-items: center; gap: 8px; }
-.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--signal); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--cta); }
 @media (prefers-reduced-motion: no-preference) { .dot { animation: pulse 1.8s ease-in-out infinite; } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } } }
 .card-body { padding: 22px 20px 24px; }
 .card h2 { font-size: 26px; margin-bottom: 6px; }
@@ -77,7 +83,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 .consent { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 0; font-weight: 400; font-size: 14px; color: var(--muted); }
 .consent input { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--cta); }
 .btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 50px; margin-top: 20px; padding: 0 22px; border-radius: 10px; background: var(--cta); color: var(--cta-ink); font: 600 16px var(--font-body); border: 0; cursor: pointer; }
-.btn:hover { filter: brightness(1.08); }
+.btn:hover { filter: brightness(1.06); }
 .btn[disabled] { opacity: .65; cursor: wait; }
 .alert { margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: var(--bad-bg); color: var(--bad); font-size: 14.5px; }
 .thanks { text-align: center; padding: 28px 8px 20px; }
@@ -93,34 +99,24 @@ footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
 <body>
 <header>
   <div class="wrap">
-    <a class="brand" href="https://hellora.ca/" aria-label="Hellora home">
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--accent)"/>
-        <path d="M10 17c2.5 4 9.5 4 12 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color: var(--accent)"/>
-        <circle cx="11.5" cy="12" r="1.8" fill="currentColor" style="color: var(--accent)"/>
-        <circle cx="20.5" cy="12" r="1.8" fill="currentColor" style="color: var(--accent)"/>
-      </svg>
-      Hellora
-    </a>
+    <span class="biz"><i aria-hidden="true"></i><span id="bizName">&nbsp;</span></span>
     <span class="pill" id="pill" hidden>Live demo</span>
   </div>
 </header>
 
 <main>
   <section class="hero" id="page" hidden>
+    <div class="deco" id="deco" aria-hidden="true"></div>
     <div class="wrap">
-      <div>
-        <p class="eyebrow" id="eyebrow">Sample enquiry page</p>
-        <h1 id="headline">Hot water tank not working?</h1>
-        <p class="lede" id="lede">Tell us what is going on and we will call you to understand the job, so your quote and visit are right the first time.</p>
+      <div class="intro">
+        <p class="eyebrow" id="eyebrow"></p>
+        <h1 id="headline"></h1>
+        <p class="lede" id="lede"></p>
+        <p class="call" id="callLine" hidden>Prefer to call? <a id="callLink" href="#"></a></p>
         <ul class="points" id="points"></ul>
         <div class="steps">
           <b>What happens next</b>
-          <ol>
-            <li>You send this form.</li>
-            <li>An AI assistant from Hellora phones you to ask a few questions.</li>
-            <li>It books a time for a one-to-one call and sends you the invite.</li>
-          </ol>
+          <ol id="stepList"></ol>
         </div>
       </div>
 
@@ -128,7 +124,7 @@ footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
         <div class="card-top"><span class="live"><span class="dot" aria-hidden="true"></span> Enquiry form</span><span>about 1 minute</span></div>
         <div class="card-body">
           <div id="formView">
-            <h2>Request a call back</h2>
+            <h2 id="formTitle">Request a call back</h2>
             <p class="sub">We call you, so there is no waiting on hold.</p>
             <form id="leadForm" novalidate>
               <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -157,13 +153,13 @@ footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
       </div>
     </div>
   </section>
-  <section class="hero" id="missing" hidden><div class="wrap"><div><h1>Page not found</h1><p class="lede">This page does not exist or is no longer active.</p></div></div></section>
+  <section class="hero" id="missing" hidden><div class="wrap" style="display:block"><h1>Page not found</h1><p class="lede" style="margin-top:16px">This page does not exist or is no longer active.</p></div></section>
 </main>
 
 <footer>
   <div class="wrap">
     <span id="footerText"></span>
-    <span><a href="https://hellora.ca/">Hellora, AI phone receptionist</a></span>
+    <span><a href="https://hellora.ca/">Powered by Hellora, AI phone receptionist</a></span>
   </div>
 </footer>
 
@@ -174,31 +170,97 @@ footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
   var q = /[?&]s=([a-z0-9-]+)/i.exec(location.search);
   var m = /^\/c\/([a-z0-9-]+)\/?$/i.exec(location.pathname);
   var slug = ((m && m[1]) || (q && q[1]) || '').toLowerCase();
-  var CONFIG = null;
 
-  function missing() {
-    $('page').hidden = true; $('missing').hidden = false; document.title = 'Page not found | Hellora';
-  }
+  // Background motifs (SVG masks, drawn in the accent colour at low opacity).
+  function svg(inner) { return "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'>" + inner + "</svg>\")"; }
+  var PAT = {
+    dots: svg("<circle cx='18' cy='18' r='2.2'/>"),
+    lines: svg("<path d='M-4 40L40 -4' stroke='black' stroke-width='3' fill='none'/>"),
+    waves: svg("<path d='M0 18q9-12 18 0t18 0' stroke='black' stroke-width='2.5' fill='none'/>"),
+    grid: svg("<path d='M0 0H36V36' stroke='black' stroke-width='1.5' fill='none'/>"),
+    plus: svg("<path d='M18 10V26M10 18H26' stroke='black' stroke-width='2.5' fill='none'/>"),
+    none: ''
+  };
+
+  // One entry per page type. p = palette. Light: a=accent, s=soft, c=button, ci=button text, bg, band, bi=band text.
+  // Dark: the d* values. fd = display font, lay = layout, copy = defaults used when the row leaves a field empty.
+  var T = {
+    generic: { name: 'Generic', lay: 'split', pat: 'dots', p: { a: '#C2410C', s: '#FDEEE3', c: '#F97316', ci: '#1A0B00', bg: '#FBFAF9', band: '#1F1A17', bi: '#FFF7F0', da: '#FB923C', ds: '#2B1B10', dc: '#FB923C', dci: '#1A0B00', dband: '#2A211B' },
+      cta: 'Request a call back', copy: { eyebrow: 'Get in touch', headline: 'How can we help?', lede: 'Tell us what you need and we will call you back to sort out the details.', points: ['We call you, no waiting on hold', 'Quick and friendly', 'Tell us as much or as little as you like'], topicLabel: 'What do you need?', topics: ['A quote', 'A booking', 'A question', 'Something else'], industry: 'local business' } },
+    trades: { name: 'Home services and trades', lay: 'split', pat: 'lines', p: { a: '#C2410C', s: '#FDEEE3', c: '#F97316', ci: '#1A0B00', bg: '#FBFAF9', band: '#1F1A17', bi: '#FFF7F0', da: '#FB923C', ds: '#2B1B10', dc: '#FB923C', dci: '#1A0B00', dband: '#2A211B' },
+      cta: 'Request a call back', copy: { eyebrow: 'Home services', headline: 'Need a hand with a job at home?', lede: 'Tell us what is going on and we will call you to understand the job, so your quote and visit are right the first time.', points: ['Repairs, installs and urgent jobs', 'A clear quote before any work starts', 'We call you, no waiting on hold'], topicLabel: 'What do you need?', topics: ['Repair', 'New installation', 'Quote or estimate', 'Urgent problem', 'Something else'], industry: 'home services and trades' } },
+    clinic: { name: 'Clinic and dental', lay: 'stack', center: true, pat: 'plus', p: { a: '#0F766E', s: '#E3F4F1', c: '#0D9488', ci: '#FFFFFF', bg: '#F6FBFA', band: '#0F3D3A', bi: '#E8FBF8', da: '#5EEAD4', ds: '#12302D', dc: '#2DD4BF', dci: '#042F2C', dband: '#0F2F2D' },
+      cta: 'Request an appointment', copy: { eyebrow: 'Appointments', headline: 'Book your visit with us', lede: 'Tell us what you need and we will call you to find a time that suits you.', points: ['Choose a time that suits you', 'We confirm by phone and email', 'Tell us if it is urgent'], topicLabel: 'Reason for your visit', topics: ['Check-up', 'Cleaning', 'Pain or urgent problem', 'Consultation', 'Something else'], industry: 'clinic or dental practice' } },
+    salon: { name: 'Salon, beauty and wellness', lay: 'rev', pat: 'waves', fd: "'Fraunces', Georgia, serif", hw: 500, p: { a: '#9D174D', s: '#FCE7F1', c: '#DB2777', ci: '#FFFFFF', bg: '#FFFAFC', band: '#4A1030', bi: '#FFF1F7', da: '#F9A8D4', ds: '#3B1228', dc: '#F472B6', dci: '#2A0A1B', dband: '#3B1228' },
+      cta: 'Book an appointment', copy: { eyebrow: 'Appointments', headline: 'Ready for your next appointment?', lede: 'Tell us what you would like and we will call you to find the perfect time.', points: ['Pick the service you want', 'We confirm your time by phone', 'Changes are easy, just call'], topicLabel: 'What would you like?', topics: ['Haircut and style', 'Colour', 'Nails', 'Facial or skin', 'Massage or spa', 'Something else'], industry: 'salon, beauty and wellness' } },
+    restaurant: { name: 'Restaurant and cafe', lay: 'banner', pat: 'dots', fd: "'Fraunces', Georgia, serif", hw: 700, p: { a: '#B91C1C', s: '#FDECEC', c: '#DC2626', ci: '#FFFFFF', bg: '#FFFBF5', band: '#7F1D1D', bi: '#FFF4E8', da: '#FCA5A5', ds: '#3A1414', dc: '#F87171', dci: '#2A0B0B', dband: '#4A1717' },
+      cta: 'Send enquiry', copy: { eyebrow: 'Reservations and enquiries', headline: 'Planning a table or an event?', lede: 'Tell us when and how many, and we will call you to confirm.', points: ['Tables for any size of group', 'Private events and catering', 'We confirm by phone'], topicLabel: 'What are you planning?', topics: ['Reserve a table', 'Group booking', 'Private event', 'Catering', 'Something else'], industry: 'restaurant or cafe' } },
+    legal: { name: 'Law and professional services', lay: 'stack', pat: 'grid', fd: "'DM Serif Display', Georgia, serif", hw: 400, p: { a: '#1E3A8A', s: '#E8EDFA', c: '#1E40AF', ci: '#FFFFFF', bg: '#FAFAF8', band: '#172554', bi: '#F5F3EA', da: '#93B4FF', ds: '#16213F', dc: '#60A5FA', dci: '#0B1426', dband: '#16213F' },
+      cta: 'Request a consultation', copy: { eyebrow: 'Consultations', headline: 'Speak with someone about your matter', lede: 'Tell us briefly what it is about and we will call you to arrange a consultation.', points: ['A short first call to understand your matter', 'We arrange a time that suits you', 'Your details are kept private'], topicLabel: 'What is your matter about?', topics: ['Family', 'Real estate', 'Business', 'Wills and estates', 'Something else'], industry: 'law or professional services' } },
+    auto: { name: 'Auto repair', lay: 'split', pat: 'lines', p: { a: '#A16207', s: '#FEF6D8', c: '#FACC15', ci: '#1A1500', bg: '#F7F7F5', band: '#1C1C1C', bi: '#FFF8D6', da: '#FACC15', ds: '#2A2410', dc: '#FACC15', dci: '#1A1500', dband: '#262626' },
+      cta: 'Book a service', copy: { eyebrow: 'Service and repair', headline: 'Car trouble? Let us book you in', lede: 'Tell us what the car is doing and we will call you to find a time to look at it.', points: ['Maintenance, brakes, tires and diagnostics', 'We call you with a time', 'Tell us if it is urgent'], topicLabel: 'What does the car need?', topics: ['Maintenance', 'Brakes', 'Tires', 'Diagnostics', 'Something else'], industry: 'auto repair' } },
+    fitness: { name: 'Fitness and studio', lay: 'banner', pat: 'lines', up: true, hw: 800, p: { a: '#3F6212', s: '#ECF8D5', c: '#A3E635', ci: '#0F1A00', bg: '#FAFCF5', band: '#0F1A00', bi: '#ECFCCB', da: '#BEF264', ds: '#1D2A0B', dc: '#A3E635', dci: '#0F1A00', dband: '#1A2608' },
+      cta: 'Get started', copy: { eyebrow: 'Join in', headline: 'Start training with us', lede: 'Tell us what you are after and we will call you to get you started.', points: ['Trial classes and memberships', 'Group and one-to-one training', 'We call you to book'], topicLabel: 'What are you interested in?', topics: ['Trial class', 'Membership', 'Personal training', 'Group classes', 'Something else'], industry: 'fitness studio or gym' } },
+    realestate: { name: 'Real estate', lay: 'rev', pat: 'grid', p: { a: '#166534', s: '#E4F3E8', c: '#15803D', ci: '#FFFFFF', bg: '#FBFAF5', band: '#14532D', bi: '#F3F0E1', da: '#86EFAC', ds: '#12301C', dc: '#4ADE80', dci: '#052E16', dband: '#14301F' },
+      cta: 'Request a call', copy: { eyebrow: 'Property enquiries', headline: 'Thinking of buying, selling or renting?', lede: 'Tell us what you have in mind and we will call you to talk it through.', points: ['Buying, selling and renting', 'Property valuations', 'We call you at a time that suits you'], topicLabel: 'What are you looking for?', topics: ['Buying', 'Selling', 'Renting', 'A valuation', 'Something else'], industry: 'real estate' } },
+    cleaning: { name: 'Cleaning services', lay: 'stack', center: true, pat: 'waves', p: { a: '#0369A1', s: '#E0F2FE', c: '#0EA5E9', ci: '#00212F', bg: '#F5FAFD', band: '#0C4A6E', bi: '#E7F6FF', da: '#7DD3FC', ds: '#0F2A3B', dc: '#38BDF8', dci: '#04202F', dband: '#0B3350' },
+      cta: 'Get a quote', copy: { eyebrow: 'Cleaning services', headline: 'A cleaner place, booked in a minute', lede: 'Tell us about the space and we will call you with a quote and a time.', points: ['Regular and one-off cleans', 'Homes and offices', 'A clear quote before we start'], topicLabel: 'What needs cleaning?', topics: ['Regular cleaning', 'Deep clean', 'Move in or out', 'Office', 'Something else'], industry: 'cleaning services' } }
+  };
+
+  function missing() { $('page').hidden = true; $('missing').hidden = false; document.title = 'Page not found'; }
   if (!slug) { missing(); return; }
 
   fetch(ENDPOINT + 'hellora-c-config?slug=' + encodeURIComponent(slug))
     .then(function (r) { return r.json(); })
-    .then(function (c) { if (!c.ok) { missing(); return; } CONFIG = c; start(); })
+    .then(function (c) { if (!c.ok) { missing(); return; } start(c); })
     .catch(function () { missing(); });
 
-  function start() {
-    var demo = slug === 'demo';
+  function applyTheme(t, accent) {
+    var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var p = t.p, r = document.documentElement.style;
+    function set(k, v) { r.setProperty(k, v); }
+    if (dark) {
+      set('--bg', '#12100F'); set('--surface', '#1C1917'); set('--ink', '#F5F1EE'); set('--muted', '#B3A9A2'); set('--line', '#34302D');
+      set('--accent', p.da); set('--soft', p.ds); set('--cta', p.dc); set('--cta-ink', p.dci); set('--band', p.dband); set('--band-ink', '#F7F1EC');
+      set('--bad', '#FCA5A5'); set('--bad-bg', '#3A1A17'); set('--ok', '#4ADE80'); document.documentElement.style.colorScheme = 'dark';
+    } else {
+      set('--bg', p.bg); set('--surface', '#FFFFFF'); set('--ink', '#1F1A17'); set('--muted', '#5C524B'); set('--line', '#E6E1DC');
+      set('--accent', p.a); set('--soft', p.s); set('--cta', p.c); set('--cta-ink', p.ci); set('--band', p.band); set('--band-ink', p.bi);
+    }
+    if (accent && !dark) { set('--accent', accent); set('--cta', accent); set('--cta-ink', '#FFFFFF'); }
+    if (t.fd) set('--font-display', t.fd);
+    if (t.up) set('--h-transform', 'uppercase');
+    if (t.hw) set('--h-weight', String(t.hw));
+    document.querySelector('meta[name=theme-color]').setAttribute('content', dark ? p.dband : p.band);
+    var pat = PAT[t.pat] || '';
+    var deco = $('deco');
+    if (pat) { deco.style.webkitMaskImage = pat; deco.style.maskImage = pat; } else { deco.hidden = true; }
+    document.body.className = 'lay-' + t.lay + (t.center ? ' center' : '');
+  }
+
+  function start(c) {
+    var t = T[c.template] || T.generic, d = t.copy;
+    var demo = /^demo/.test(slug);
+    applyTheme(t, c.accent);
+    var biz = c.business || 'Our business';
+    document.title = biz + ' | ' + t.cta;
+    $('bizName').textContent = biz;
     $('pill').hidden = !demo;
-    document.title = CONFIG.business + ' | Request a call back';
-    $('eyebrow').textContent = CONFIG.eyebrow;
-    $('headline').textContent = CONFIG.headline;
-    $('lede').textContent = CONFIG.lede;
-    $('topicLabel').textContent = CONFIG.topic_label;
-    $('footerText').textContent = CONFIG.business + (demo ? '. Sample page for demonstration only.' : '');
-    $('consentText').textContent = 'I agree that ' + CONFIG.business + ' may call me about this enquiry. The call is made by an AI voice assistant and may be recorded.';
+    $('eyebrow').textContent = c.eyebrow || d.eyebrow;
+    $('headline').textContent = c.headline || d.headline;
+    $('lede').textContent = c.lede || d.lede;
+    if (c.phone) { $('callLink').textContent = c.phone; $('callLink').href = 'tel:' + c.phone.replace(/[^0-9+]/g, ''); $('callLine').hidden = false; }
+    var pts = (c.points && c.points.length) ? c.points : d.points;
+    pts.forEach(function (p) { var li = document.createElement('li'); li.textContent = p; $('points').appendChild(li); });
+    var topics = (c.topics && c.topics.length) ? c.topics : d.topics;
+    topics.forEach(function (x) { var o = document.createElement('option'); o.value = x; o.textContent = x; $('topic').appendChild(o); });
+    $('topicLabel').textContent = c.topic_label || d.topicLabel;
+    $('formTitle').textContent = t.cta;
+    $('submitBtn').textContent = t.cta;
+    ['You send this form.', 'An AI assistant calling for ' + biz + ' phones you to go over the details.', 'It sorts out a time and sends you a confirmation.'].forEach(function (s) { var li = document.createElement('li'); li.textContent = s; $('stepList').appendChild(li); });
+    $('footerText').textContent = biz + (demo ? '. Sample page for demonstration only.' : '');
+    $('consentText').textContent = 'I agree that ' + biz + ' may call me about this enquiry. The call is made by an AI voice assistant and may be recorded.';
     $('demoNote').hidden = !demo;
-    CONFIG.points.forEach(function (p) { var li = document.createElement('li'); li.textContent = p; $('points').appendChild(li); });
-    CONFIG.topics.forEach(function (t) { var o = document.createElement('option'); o.value = t; o.textContent = t; $('topic').appendChild(o); });
     $('page').hidden = false;
 
     var form = $('leadForm'), btn = $('submitBtn'), alertBox = $('formAlert');
@@ -206,18 +268,18 @@ footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       alertBox.hidden = true;
-      var d = { name: $('name').value.trim(), phone: $('phone').value.trim(), email: $('email').value.trim(), topic: $('topic').value, message: $('message').value.trim(), website: form.elements.website.value };
-      if (!d.name) return fail('Please enter your name.');
-      if (d.phone.replace(/\D/g, '').length < 10) return fail('Please enter a phone number with area code.');
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return fail('Please enter a valid email address.');
+      var x = { name: $('name').value.trim(), phone: $('phone').value.trim(), email: $('email').value.trim(), topic: $('topic').value, message: $('message').value.trim(), website: form.elements.website.value };
+      if (!x.name) return fail('Please enter your name.');
+      if (x.phone.replace(/\D/g, '').length < 10) return fail('Please enter a phone number with area code.');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x.email)) return fail('Please enter a valid email address.');
       if (!$('consent').checked) return fail('Please tick the box so we are allowed to call you.');
       btn.disabled = true; btn.textContent = 'Sending...';
-      d.consent = true; d.business = CONFIG.business; d.industry = CONFIG.industry; d.site = 'c/' + slug;
-      d.consent_text = $('consentText').textContent; d.page = location.href;
-      fetch(ENDPOINT + 'hellora-demo-lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
+      x.consent = true; x.business = biz; x.industry = c.industry || d.industry; x.site = 'c/' + slug;
+      x.consent_text = $('consentText').textContent; x.page = location.href;
+      fetch(ENDPOINT + 'hellora-demo-lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(x) })
         .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
         .then(function () { $('formView').hidden = true; $('thanksView').hidden = false; $('thanksView').focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); })
-        .catch(function () { fail('Sorry, that did not go through. Please try again in a moment.'); btn.disabled = false; btn.textContent = 'Request a call back'; });
+        .catch(function () { fail('Sorry, that did not go through. Please try again in a moment.'); btn.disabled = false; btn.textContent = t.cta; });
     });
   }
 })();
