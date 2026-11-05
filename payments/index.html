@@ -136,27 +136,31 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
 <main class="wrap">
   <div class="card pay">
     <h1>Pay for Hellora</h1>
-    <p class="sub">Choose what you are paying for. You will finish on a secure Stripe page.</p>
+    <p class="sub">Two steps: pay the one-time setup, then start your monthly plan. Prices are in Canadian dollars, plus applicable tax. You finish on a secure Stripe page.</p>
 
-    <div class="plan main" id="p-both">
-      <h2>Setup and first month</h2>
-      <div class="price" data-price="both"></div>
-      <p class="what">We set up your assistant around your hours, greeting and calendar. Then your monthly plan starts.</p>
-      <a class="btn off" data-link="both" href="#" rel="noopener">Payment link coming soon</a>
-    </div>
-
-    <div class="plan" id="p-month">
-      <h2>Monthly plan only</h2>
-      <div class="price" data-price="monthly"></div>
-      <p class="what">Already set up? Start or restart your monthly plan here.</p>
-      <a class="btn off" data-link="monthly" href="#" rel="noopener">Payment link coming soon</a>
-    </div>
-
-    <div class="plan" id="p-setup">
-      <h2>One-time setup fee</h2>
-      <div class="price" data-price="setup"></div>
-      <p class="what">Pay the setup fee on its own.</p>
+    <div class="plan main">
+      <h2>Step 1: One-time setup</h2>
+      <div class="price" id="setup-price">C$299 for our first 8 customers, then C$499</div>
+      <p class="what">We set up your assistant around your hours, greeting and calendar, and run test calls with you.</p>
       <a class="btn off" data-link="setup" href="#" rel="noopener">Payment link coming soon</a>
+    </div>
+
+    <div class="plan">
+      <h2>Step 2: Standard, C$149 / month</h2>
+      <p class="what">Up to 300 call minutes a month. Extra minutes are C$0.50 each.</p>
+      <a class="btn off" data-link="standard" href="#" rel="noopener">Payment link coming soon</a>
+    </div>
+
+    <div class="plan">
+      <h2>Step 2: Pro, C$349 / month</h2>
+      <p class="what">Up to 1,000 call minutes a month. Extra minutes are C$0.50 each.</p>
+      <a class="btn off" data-link="pro" href="#" rel="noopener">Payment link coming soon</a>
+    </div>
+
+    <div class="plan">
+      <h2>Step 2: Ultimate, C$699 / month</h2>
+      <p class="what">Unlimited call minutes, for normal use at one business location (fair use applies).</p>
+      <a class="btn off" data-link="ultimate" href="#" rel="noopener">Payment link coming soon</a>
     </div>
 
     <div class="trust">
@@ -168,16 +172,14 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
 </main>
 <script>
 (function () {
-  // Fill these in with the Stripe Payment Links (https://buy.stripe.com/...) and display prices.
+  // Fill these in with the Stripe Payment Links (https://buy.stripe.com/...).
+  // The setup link is switched from the C$299 link to the C$499 link after the 8th customer.
   var CONFIG = {
-    links:  { both: '', monthly: '', setup: '' },
-    prices: { both: '', monthly: '', setup: '' }
+    links: { setup: '', standard: '', pro: '', ultimate: '' }
   };
   Object.keys(CONFIG.links).forEach(function (k) {
     var a = document.querySelector('[data-link="' + k + '"]');
-    var p = document.querySelector('[data-price="' + k + '"]');
     var url = CONFIG.links[k];
-    if (p) { p.textContent = CONFIG.prices[k]; p.hidden = !CONFIG.prices[k]; }
     if (a && /^https:\/\/(buy|checkout)\.stripe\.com\//.test(url)) {
       a.href = url; a.textContent = 'Pay securely with Stripe'; a.classList.remove('off');
     }

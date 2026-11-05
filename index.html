@@ -89,7 +89,7 @@
      "name": "What does it cost after the pilot?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "A monthly fee based on how many calls you get, plus a one-time setup. We give you the number in writing before you decide."
+      "text": "Standard is C$149 a month (up to 300 call minutes), Pro is C$349 a month (up to 1,000 minutes) and Ultimate is C$699 a month with unlimited minutes, subject to fair use. Extra minutes on Standard and Pro are C$0.50 each. Setup is a one-time C$299 for our first 8 customers, then C$499. Prices are in Canadian dollars plus applicable tax, and we confirm everything in writing before you commit."
      }
     },
     {
@@ -296,6 +296,21 @@ nav a.link:hover { color: var(--ink); }
 .pilot .btn { justify-self: start; }
 @media (max-width: 880px) { .pilot .wrap { grid-template-columns: minmax(0, 1fr); } }
 
+
+/* pricing */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 28px; }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px; }
+.plan.feat { border-color: var(--accent); border-width: 2px; }
+.plan h3 { font-size: 22px; }
+.plan .amt { font-family: var(--font-display); font-size: 40px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.plan .amt small { font-size: 16px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.plan .mins { font-weight: 600; }
+.plan ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; }
+.plan .btn { margin-top: auto; }
+.pricenote { margin-top: 22px; display: grid; gap: 8px; color: var(--muted); font-size: 15.5px; max-width: 78ch; }
+.pricenote b { color: var(--ink); }
+@media (max-width: 880px) { .plans { grid-template-columns: minmax(0, 1fr); } }
+
 /* promises */
 .promises { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
 .promises div { border-top: 2px solid var(--ink); padding-top: 16px; }
@@ -385,6 +400,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
     <nav>
       <a class="link" href="#industries">Who it's for</a>
       <a class="link" href="#how">How it works</a>
+      <a class="link" href="#pricing">Pricing</a>
       <a class="link" href="#faq">Questions</a>
       <a class="btn" href="#contact">Start a free pilot</a>
     </nav>
@@ -503,9 +519,58 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
     <div class="wrap">
       <div>
         <h2>Try it free for a week.</h2>
-        <p>We are setting up our first local businesses now. Tell us what your phone line looks like and we will build a receptionist for it, run it alongside your team for seven days, and show you every call. Monthly pricing comes after the pilot, based on your call volume, and we quote it before you commit to anything.</p>
+        <p>We are setting up our first local businesses now. Tell us what your phone line looks like and we will build a receptionist for it, run it alongside your team for seven days, and show you every call. If you keep it, you choose a monthly plan, and we confirm the price in writing before you commit to anything.</p>
       </div>
       <a class="btn" href="#contact">Request a pilot</a>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <p class="eyebrow">Pricing</p>
+      <h2 style="font-size: clamp(30px, 4vw, 44px);">Simple monthly plans.</h2>
+      <p style="margin-top: 12px; max-width: 62ch; color: var(--muted); font-size: 18px;">Start with a free one-week pilot. If you keep Hellora, pick the plan that fits your call volume. Prices are in Canadian dollars, plus applicable tax.</p>
+      <div class="plans">
+        <div class="plan">
+          <h3>Standard</h3>
+          <div class="amt">C$149 <small>/ month</small></div>
+          <p class="mins">Up to 300 call minutes a month</p>
+          <ul>
+            <li>AI answering, booking and call summaries</li>
+            <li>Web enquiry call-backs</li>
+            <li>Client dashboard with transcripts and recordings</li>
+            <li>Extra minutes: C$0.50 each</li>
+          </ul>
+          <a class="btn ghost" href="#contact">Start a free pilot</a>
+        </div>
+        <div class="plan feat">
+          <h3>Pro</h3>
+          <div class="amt">C$349 <small>/ month</small></div>
+          <p class="mins">Up to 1,000 call minutes a month</p>
+          <ul>
+            <li>Everything in Standard</li>
+            <li>For busier phone lines</li>
+            <li>Extra minutes: C$0.50 each</li>
+          </ul>
+          <a class="btn" href="#contact">Start a free pilot</a>
+        </div>
+        <div class="plan">
+          <h3>Ultimate</h3>
+          <div class="amt">C$699 <small>/ month</small></div>
+          <p class="mins">Unlimited call minutes</p>
+          <ul>
+            <li>Everything in Pro</li>
+            <li>No minutes to count or worry about</li>
+            <li>Fair use applies: for normal use at one business location</li>
+          </ul>
+          <a class="btn ghost" href="#contact">Start a free pilot</a>
+        </div>
+      </div>
+      <div class="pricenote">
+        <p><b>One-time setup:</b> C$299 for our first 8 customers, then C$499. Setup covers your hours, greeting, calendar connection and test calls.</p>
+        <p><b>Free pilot first:</b> one week, no payment. We quote in writing before you commit.</p>
+        <p><b>Cancel any time.</b> Monthly plans renew each month until you cancel.</p>
+      </div>
     </div>
   </section>
 
@@ -532,7 +597,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
       <details><summary>What happens when it can't answer something?</summary><p>It says so, takes the caller's name, number and reason, and sends the message to your team straight away. It does not make something up.</p></details>
       <details><summary>Does it work with my phone system?</summary><p>If your business line can forward calls, it works. That covers most landlines, VoIP services and mobile numbers.</p></details>
       <details><summary>Can it connect to my POS, CRM or booking software?</summary><p>Calendar booking works from day one. Other systems such as a POS or CRM depend on what they allow, so we check each one with you before promising it.</p></details>
-      <details><summary>What does it cost after the pilot?</summary><p>A monthly fee based on how many calls you get, plus a one-time setup. We give you the number in writing before you decide.</p></details>
+      <details><summary>What does it cost after the pilot?</summary><p>Standard is C$149 a month (up to 300 call minutes), Pro is C$349 a month (up to 1,000 minutes) and Ultimate is C$699 a month with unlimited minutes, subject to fair use. Extra minutes on Standard and Pro are C$0.50 each. Setup is a one-time C$299 for our first 8 customers, then C$499. Prices are in Canadian dollars plus applicable tax, and we confirm everything in writing before you commit.</p></details>
       <details><summary>Is it right for a healthcare practice?</summary><p>For booking and general questions, yes. We keep health details off the call: it collects a name, phone number and appointment type, and it sends anything clinical to your staff.</p></details>
       <details><summary>What happens when someone fills in my contact form?</summary><p>With their consent, Hellora can phone them back, ask a few questions about what they need and book a time with your team. Each call is approved by you first during the pilot, and the caller can say stop at any time.</p></details>
       <details><summary>I don't have a website. Can you set up a contact form for me?</summary><p>Yes. We can build a simple enquiry page for your business on its own hellora.ca address, so people can reach you and Hellora can follow up. Ask us for a live demo.</p></details>
