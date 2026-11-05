@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-label="Caller on the phone with the Hellora receptionist">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FDEEE3"/><stop offset="1" stop-color="#FBFAF9"/></linearGradient></defs>
+<rect width="640" height="300" rx="20" fill="url(#bg)"/>
+<circle cx="110" cy="250" r="150" fill="#F9731622"/><circle cx="540" cy="60" r="110" fill="#C2410C14"/>
+<!-- caller (left) -->
+<g transform="translate(150,0)">
+<path d="M-90 300 C-90 215 -50 190 0 190 C50 190 90 215 90 300 Z" fill="#F97316"/>
+<rect x="-14" y="160" width="28" height="36" rx="12" fill="#D9A57A"/>
+<circle cx="0" cy="118" r="52" fill="#D9A57A"/>
+<path d="M-54 112 C-58 56 -20 60 6 62 C40 60 60 70 54 112 C46 86 20 82 0 84 C-24 84 -46 92 -54 112 Z" fill="#1F1A17"/>
+<circle cx="-18" cy="122" r="4.5" fill="#1F1A17"/><circle cx="18" cy="122" r="4.5" fill="#1F1A17"/>
+<path d="M-16 142 Q0 156 16 142" stroke="#1F1A17" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+<rect x="46" y="100" width="22" height="46" rx="6" fill="#1F1A17" transform="rotate(12 57 123)"/>
+<rect x="49" y="106" width="16" height="30" rx="3" fill="#F97316" transform="rotate(12 57 123)"/>
+</g>
+<!-- receptionist (right) -->
+<g transform="translate(490,0)">
+<path d="M-90 300 C-90 215 -50 190 0 190 C50 190 90 215 90 300 Z" fill="#1F1A17"/>
+<path d="M-18 190 L0 222 L18 190 Z" fill="#fff"/>
+<rect x="-14" y="160" width="28" height="36" rx="12" fill="#F5D0B0"/>
+<circle cx="0" cy="118" r="52" fill="#F5D0B0"/>
+<path d="M-56 118 C-62 50 -10 40 14 46 C52 50 64 84 56 126 C52 96 40 84 0 82 C-30 82 -48 94 -56 118 Z" fill="#6B3F24"/>
+<circle cx="-18" cy="122" r="4.5" fill="#1F1A17"/><circle cx="18" cy="122" r="4.5" fill="#1F1A17"/>
+<path d="M-16 142 Q0 156 16 142" stroke="#1F1A17" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+<path d="M-56 114 C-60 70 60 70 56 114" stroke="#F97316" stroke-width="7" fill="none" stroke-linecap="round"/>
+<rect x="-66" y="108" width="14" height="28" rx="7" fill="#F97316"/>
+<path d="M-60 134 C-58 156 -34 160 -22 152" stroke="#F97316" stroke-width="5" fill="none" stroke-linecap="round"/>
+</g>
+<!-- sound waves -->
+<g fill="none" stroke="#F97316" stroke-linecap="round" stroke-width="6">
+<path d="M262 120 Q276 150 262 180" opacity=".9"/><path d="M286 100 Q310 150 286 200" opacity=".65"/><path d="M310 80 Q344 150 310 220" opacity=".4"/>
+</g>
+<g fill="#C2410C" opacity=".8"><circle cx="340" cy="150" r="5"/><circle cx="360" cy="150" r="5"/><circle cx="380" cy="150" r="5"/></g>
+<!-- icon bubble -->
+<g transform="translate(560,34)"><circle r="30" fill="#fff" stroke="#E8E2DD" stroke-width="2"/><path d="M0 16 L-15 -12 Q0 -20 15 -12 Z" fill="#F9C74F" stroke="#C2410C" stroke-width="3" stroke-linejoin="round"/><circle cx="-3" cy="-6" r="3" fill="#C2410C"/><circle cx="5" cy="0" r="3" fill="#C2410C"/><circle cx="-1" cy="6" r="2.5" fill="#C2410C"/></g>
+<g font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#1F1A17">
+<text x="150" y="284" text-anchor="middle" fill="#fff">Caller</text><text x="490" y="284" text-anchor="middle" fill="#fff">Hellora</text></g>
+</svg>
