@@ -140,7 +140,7 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
 
     <div class="plan main">
       <h2>Step 1: One-time setup</h2>
-      <div class="price" id="setup-price">C$299 for our first 8 customers, then C$499</div>
+      <div class="price" id="setup-price">Checking the current setup price...</div>
       <p class="what">We set up your assistant around your hours, greeting and calendar, and run test calls with you.</p>
       <a class="btn off" data-link="setup" href="#" rel="noopener">Payment link coming soon</a>
     </div>
@@ -172,18 +172,31 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
 </main>
 <script>
 (function () {
-  // Fill these in with the Stripe Payment Links (https://buy.stripe.com/...).
-  // The setup link is switched from the C$299 link to the C$499 link after the 8th customer.
-  var CONFIG = {
-    links: { setup: '', standard: '', pro: '', ultimate: '' }
+  // Stripe Payment Links. LIVE links go here when the Stripe account is approved.
+  // Add ?test=1 to the page address to use the sandbox (test) links with Stripe test cards.
+  var LIVE = { setupFounding: '', setupRegular: '', standard: '', pro: '', ultimate: '' };
+  var TEST = {
+    setupFounding: 'https://buy.stripe.com/test_14A6oG0NU3uif0A5CE3sI03',
+    setupRegular: 'https://buy.stripe.com/test_dRm14m0NU5CqaKk0ik3sI00',
+    standard: 'https://buy.stripe.com/test_00wbJ04064ym8Cc9SU3sI02',
+    pro: 'https://buy.stripe.com/test_14A4gygMS6GudWwaWY3sI04',
+    ultimate: 'https://buy.stripe.com/test_eVq4gygMS6GucSs1mo3sI01'
   };
-  Object.keys(CONFIG.links).forEach(function (k) {
-    var a = document.querySelector('[data-link="' + k + '"]');
-    var url = CONFIG.links[k];
-    if (a && /^https:\/\/(buy|checkout)\.stripe\.com\//.test(url)) {
-      a.href = url; a.textContent = 'Pay securely with Stripe'; a.classList.remove('off');
-    }
-  });
+  var PRICING_URL = 'https://n8n.srv1888501.hstgr.cloud/webhook/hellora-pricing';
+  var isTest = /[?&]test=1\b/.test(location.search);
+  var L = isTest ? TEST : LIVE;
+  var okUrl = function (u) { return /^https:\/\/(buy|checkout)\.stripe\.com\//.test(u); };
+  function enable(key, url) {
+    var a = document.querySelector('[data-link="' + key + '"]');
+    if (a && okUrl(url)) { a.href = url; a.textContent = isTest ? 'Pay (test mode)' : 'Pay securely with Stripe'; a.classList.remove('off'); }
+  }
+  ['standard', 'pro', 'ultimate'].forEach(function (k) { enable(k, L[k]); });
+  var sp = document.getElementById('setup-price');
+  fetch(PRICING_URL).then(function (r) { return r.json(); }).then(function (j) {
+    if (j.founding_open) { sp.textContent = 'C$299 founding price (first 8 customers)'; enable('setup', L.setupFounding); }
+    else { sp.textContent = 'C$499'; enable('setup', L.setupRegular); }
+  }).catch(function () { sp.textContent = 'Could not load the setup price. Please email hello@hellora.ca.'; });
+  if (isTest) { var n = document.createElement('p'); n.className = 'note'; n.textContent = 'Test mode: use card 4242 4242 4242 4242, any future date and any CVC. No real money is charged.'; document.querySelector('.pay .sub').after(n); }
 })();
 </script>
 </body>
