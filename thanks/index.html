@@ -204,6 +204,7 @@ header{display:none}
   var $ = function (id) { return document.getElementById(id); };
   var q = /[?&]cs=(cs_(?:test|live)_[A-Za-z0-9]{10,200})/.exec(location.search);
   var url = q ? APP + '#welcome=' + q[1] : APP;
+  var startUrl = q ? '/start/?cs=' + q[1] : null;
   $('go').href = url;
   var left = DELAY_SECONDS, timer = null;
   function tick() {
@@ -215,6 +216,7 @@ header{display:none}
   $('stay').addEventListener('click', function () { clearInterval(timer); $('count').textContent = ''; $('stay').hidden = true; });
   function loadReceipt(tries) {
     fetch(API + q[1]).then(function (r) { return r.json(); }).then(function (j) {
+      if (j.ok && j.kind === 'setup' && startUrl) { url = startUrl; $('go').href = startUrl; $('go').textContent = 'Continue to setup'; $('msg').textContent = 'Next, tell us a little about your business so we can build your assistant.'; }
       if (!j.ok) { if (tries < 3) setTimeout(function () { loadReceipt(tries + 1); }, 2000); return; }
       var money = 'C$' + Number(j.amount).toFixed(2);
       if (j.item) $('item').textContent = j.item;
