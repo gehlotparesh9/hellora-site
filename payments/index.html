@@ -166,6 +166,8 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
     <div class="trust">
       <span>Payments are processed by Stripe. Hellora never sees or stores your card details.</span>
       <span>Billing questions? Email <a href="mailto:hello@hellora.ca">hello@hellora.ca</a>.</span>
+      <span>By paying you agree to our <a href="/terms/">Terms</a> and <a href="/privacy/">Privacy</a>. See <a href="/refunds/">Refunds and cancellation</a>.</span>
+      <span>Already a customer? <a id="portal-link" href="https://billing.stripe.com/p/login/test_dRm14m0NU5CqaKk0ik3sI00" rel="noopener" hidden>Manage billing or cancel</a></span>
     </div>
     <p class="back"><a href="https://hellora.ca">Back to hellora.ca</a></p>
   </div>
@@ -185,6 +187,9 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
   var PRICING_URL = 'https://n8n.srv1888501.hstgr.cloud/webhook/hellora-pricing';
   var isTest = /[?&]test=1\b/.test(location.search);
   var L = isTest ? TEST : LIVE;
+  var PORTAL_LIVE = '';
+  var portal = document.getElementById('portal-link');
+  if (isTest) { portal.hidden = false; } else if (PORTAL_LIVE) { portal.href = PORTAL_LIVE; portal.hidden = false; }
   var okUrl = function (u) { return /^https:\/\/(buy|checkout)\.stripe\.com\//.test(u); };
   function enable(key, url) {
     var a = document.querySelector('[data-link="' + key + '"]');
