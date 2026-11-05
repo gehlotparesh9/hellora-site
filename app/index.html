@@ -276,6 +276,13 @@ footer .wrap { padding-block: 18px 32px; color: var(--muted); font-size: 13px; }
       if (j.ok && j.session) { save(j.session, j.expires_ms); start(); }
       else { show('v-login'); var er = $('login-err'); er.textContent = j.error || 'This link is invalid or has expired. Request a new one.'; er.hidden = false; }
     }).catch(function () { show('v-login'); var er = $('login-err'); er.textContent = 'Could not reach the server. Please try again.'; er.hidden = false; });
+  } else if ((m = /^#welcome=(cs_(?:test|live)_[A-Za-z0-9]{10,200})$/.exec(location.hash || ''))) {
+    show('v-verify');
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    post('hellora-app-welcome', { cs: m[1] }).then(function (j) {
+      if (j.ok && j.session) { save(j.session, j.expires_ms); start(); }
+      else { show('v-login'); var er = $('login-err'); er.textContent = j.error || 'We could not sign you in automatically. Enter your email below.'; er.hidden = false; }
+    }).catch(function () { show('v-login'); var er = $('login-err'); er.textContent = 'Could not reach the server. Please try again.'; er.hidden = false; });
   } else if (load()) { start(); } else { show('v-login'); }
 })();
 </script>
