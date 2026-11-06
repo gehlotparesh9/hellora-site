@@ -74,7 +74,7 @@ textarea { min-height: 96px; resize: vertical; }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
 .hp { position: absolute; left: -9999px; height: 0; overflow: hidden; }
 .consent { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 0; font-weight: 400; font-size: 14px; color: var(--muted); }
-.consent input { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--cta); }
+.consent input { margin-top: 0; width: 24px; height: 24px; flex: none; accent-color: var(--cta); }
 .btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 50px; margin-top: 20px; padding: 0 22px; border-radius: 10px; background: var(--cta); color: var(--cta-ink); font: 600 16px var(--font-body); border: 0; cursor: pointer; }
 .btn:hover { filter: brightness(1.08); }
 .btn[disabled] { opacity: .65; cursor: wait; }
@@ -87,6 +87,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 footer { border-top: 1px solid var(--line); }
 footer .wrap { padding-block: 22px 32px; font-size: 13.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
 footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
+footer a{display:inline-block;padding:4px 0}
 </style>
 </head>
 <body>

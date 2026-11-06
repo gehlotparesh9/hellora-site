@@ -28,6 +28,7 @@
     --ok: #4ADE80; --ok-bg: #12301D; --info: #93B4FF; --info-bg: #162240; --bad: #FCA5A5; --bad-bg: #3A1A17;
     color-scheme: dark;
   }
+  :root:not([data-theme="light"]) .step b { color: #1A0B00; }
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -75,6 +76,9 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 footer { border-top: 1px solid var(--line); margin-top: 48px; }
 footer .wrap { padding-block: 22px 32px; font-size: 13.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
 footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
+footer a{display:inline-block;padding:4px 0}
+footer a{display:inline-block !important;padding:5px 0 !important}
+.setup,.price{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
