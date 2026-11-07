@@ -163,9 +163,15 @@ footer a{display:inline-block !important;padding:5px 0 !important}
 </footer>
 <script>
 (function () {
-  // Stripe Payment Links. LIVE links go here when the Stripe account is approved.
+  // Stripe Payment Links (live). Add ?test=1 to use the sandbox links.
   // Add ?test=1 to the page address to use the sandbox (test) links with Stripe test cards.
-  var LIVE = { setupFounding: '', setupRegular: '', standard: '', pro: '', ultimate: '' };
+  var LIVE = {
+    setupFounding: 'https://buy.stripe.com/9B600lfch0pX5WWftP3VC02',
+    setupRegular: 'https://buy.stripe.com/bJe8wRc05fkRadca9v3VC03',
+    standard: 'https://buy.stripe.com/28E5kF9RX4GdgBA6Xj3VC05',
+    pro: 'https://buy.stripe.com/4gM00l5BH8WtgBA1CZ3VC04',
+    ultimate: 'https://buy.stripe.com/14AfZj3tz8Wt3OOepL3VC01'
+  };
   var TEST = {
     setupFounding: 'https://buy.stripe.com/test_14A6oG0NU3uif0A5CE3sI03',
     setupRegular: 'https://buy.stripe.com/test_dRm14m0NU5CqaKk0ik3sI00',
