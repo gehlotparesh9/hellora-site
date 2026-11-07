@@ -153,7 +153,7 @@ footer a{display:inline-block;padding:4px 0}
           <div class="thanks" id="thanksView" hidden role="status" tabindex="-1">
             <div class="tick" aria-hidden="true">&#10003;</div>
             <h2>Thank you. Your request is in.</h2>
-            <p>We will get back to you soon, and you may get a call from our assistant to go over the details.</p>
+            <p id="thanksText">We will get back to you soon, and you may get a call from our assistant to go over the details.</p>
           </div>
         </div>
       </div>
@@ -272,6 +272,7 @@ footer a{display:inline-block;padding:4px 0}
       $('stepsTitle').textContent = 'What your patients experience';
       $('demoExplainText').textContent = 'This is a sample of the appointment page Hellora sets up for ' + biz + '. Your patients use it to ask for an appointment: they send the form and our AI assistant calls them to book it. The form does not come to you or to us as a message. To feel it for yourself, fill it in with your own mobile number as if you were a patient, and the assistant will call you.';
       $('demoExplain').hidden = false;
+      $('thanksText').textContent = 'Our assistant will call you shortly from +1 431 400 5995. That is Hellora, so please pick up. If we miss you, we will try to leave a message.';
     }
     steps.forEach(function (s) { var li = document.createElement('li'); li.textContent = s; $('stepList').appendChild(li); });
     $('footerText').textContent = biz + (demo ? '. Sample page for demonstration only.' : '');
