@@ -294,7 +294,7 @@ footer a{display:inline-block;padding:4px 0}
       x.consent_text = $('consentText').textContent; x.page = location.href;
       fetch(ENDPOINT + 'hellora-demo-lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(x) })
         .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
-        .then(function () { $('formView').hidden = true; $('thanksView').hidden = false; $('thanksView').focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); })
+        .then(function () { $('formView').hidden = true; $('thanksView').hidden = false; $('thanksView').focus({ preventScroll: true }); $('formCard').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
         .catch(function () { fail('Sorry, that did not go through. Please try again in a moment.'); btn.disabled = false; btn.textContent = t.cta; });
     });
   }

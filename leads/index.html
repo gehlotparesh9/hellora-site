@@ -215,8 +215,8 @@ var CONFIG = {
     fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
       .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
       .then(function () {
-        $('formView').hidden = true; $('thanksView').hidden = false; $('thanksView').focus();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        $('formView').hidden = true; $('thanksView').hidden = false; $('thanksView').focus({ preventScroll: true });
+        $('formCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
       .catch(function () {
         fail('Sorry, that did not go through. Please try again in a moment.');
