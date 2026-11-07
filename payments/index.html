@@ -182,7 +182,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
   var PRICING_URL = 'https://n8n.srv1888501.hstgr.cloud/webhook/hellora-pricing';
   var isTest = /[?&]test=1\b/.test(location.search);
   var L = isTest ? TEST : LIVE;
-  var PORTAL_LIVE = '';
+  var PORTAL_LIVE = 'https://billing.stripe.com/p/login/cNi5kF9RX6Ol7103L73VC00';
   var portal = document.getElementById('portal-link');
   if (isTest) { portal.hidden = false; } else if (PORTAL_LIVE) { portal.href = PORTAL_LIVE; portal.hidden = false; }
   var okUrl = function (u) { return /^https:\/\/(buy|checkout)\.stripe\.com\//.test(u); };
