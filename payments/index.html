@@ -95,7 +95,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
   <section class="intro">
     <p class="eyebrow">Payments</p>
     <h1>Get started with Hellora</h1>
-    <p class="lede">Two steps: pay the one-time setup, then choose your monthly plan. Prices are in Canadian dollars, plus applicable tax. You finish on a secure Stripe page.</p>
+    <p class="lede">Two steps: pay the one-time setup, then choose your monthly plan. All prices are in Canadian dollars and exclude tax: HST or GST is added automatically at checkout where it applies, and shown before you pay. You finish on a secure Stripe page.</p>
   </section>
 
   <div class="step"><b>1</b><h2>One-time setup</h2></div>
@@ -114,7 +114,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
   <div class="plans">
     <div class="plan">
       <h3>Standard</h3>
-      <div class="amt">C$149 <small>/ month</small></div>
+      <div class="amt">C$149 <small>/ month + applicable taxes</small></div>
       <p class="mins">Up to 300 call minutes a month</p>
       <ul>
         <li>AI answering, booking and call summaries</li>
@@ -126,7 +126,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
     </div>
     <div class="plan feat">
       <h3>Pro</h3>
-      <div class="amt">C$349 <small>/ month</small></div>
+      <div class="amt">C$349 <small>/ month + applicable taxes</small></div>
       <p class="mins">Up to 1,000 call minutes a month</p>
       <ul>
         <li>Everything in Standard</li>
@@ -137,7 +137,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
     </div>
     <div class="plan">
       <h3>Ultimate</h3>
-      <div class="amt">C$699 <small>/ month</small></div>
+      <div class="amt">C$699 <small>/ month + applicable taxes</small></div>
       <p class="mins">Unlimited call minutes</p>
       <ul>
         <li>Everything in Pro</li>
@@ -193,8 +193,8 @@ footer a{display:inline-block !important;padding:5px 0 !important}
   ['standard', 'pro', 'ultimate'].forEach(function (k) { enable(k, L[k]); });
   var sp = document.getElementById('setup-price');
   fetch(PRICING_URL).then(function (r) { return r.json(); }).then(function (j) {
-    if (j.founding_open) { sp.innerHTML = 'C$299<small>Founding price, first 8 customers</small>'; enable('setup', L.setupFounding); }
-    else { sp.innerHTML = 'C$499<small>One-time</small>'; enable('setup', L.setupRegular); }
+    if (j.founding_open) { sp.innerHTML = 'C$299<small>Founding price, first 8 customers, plus applicable taxes</small>'; enable('setup', L.setupFounding); }
+    else { sp.innerHTML = 'C$499<small>One-time, plus applicable taxes</small>'; enable('setup', L.setupRegular); }
   }).catch(function () { sp.textContent = 'Could not load the setup price. Please email hello@hellora.ca.'; });
   if (isTest) { var n = document.createElement('p'); n.className = 'note'; n.textContent = 'Test mode: use card 4242 4242 4242 4242, any future date and any CVC. No real money is charged.'; document.querySelector('.intro').appendChild(n); }
 })();
