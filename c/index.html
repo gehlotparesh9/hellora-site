@@ -114,10 +114,14 @@ footer a{display:inline-block;padding:4px 0}
         <p class="eyebrow" id="eyebrow"></p>
         <h1 id="headline"></h1>
         <p class="lede" id="lede"></p>
+        <div class="steps" id="demoExplain" hidden style="margin-bottom:16px">
+          <b>What is this page?</b>
+          <p id="demoExplainText" style="margin:8px 0 0"></p>
+        </div>
         <p class="call" id="callLine" hidden>Prefer to call? <a id="callLink" href="#"></a></p>
         <ul class="points" id="points"></ul>
         <div class="steps">
-          <b>What happens next</b>
+          <b id="stepsTitle">What happens next</b>
           <ol id="stepList"></ol>
         </div>
       </div>
@@ -253,7 +257,7 @@ footer a{display:inline-block;padding:4px 0}
     $('eyebrow').textContent = c.eyebrow || d.eyebrow;
     $('headline').textContent = c.headline || d.headline;
     $('lede').textContent = c.lede || d.lede;
-    if (c.phone) { $('callLink').textContent = c.phone; $('callLink').href = 'tel:' + c.phone.replace(/[^0-9+]/g, ''); $('callLine').hidden = false; }
+    if (c.phone && !demo) { $('callLink').textContent = c.phone; $('callLink').href = 'tel:' + c.phone.replace(/[^0-9+]/g, ''); $('callLine').hidden = false; }
     var pts = (c.points && c.points.length) ? c.points : d.points;
     pts.forEach(function (p) { var li = document.createElement('li'); li.textContent = p; $('points').appendChild(li); });
     var topics = (c.topics && c.topics.length) ? c.topics : d.topics;
@@ -261,7 +265,15 @@ footer a{display:inline-block;padding:4px 0}
     $('topicLabel').textContent = c.topic_label || d.topicLabel;
     $('formTitle').textContent = t.cta;
     $('submitBtn').textContent = t.cta;
-    ['You send this form.', 'An AI assistant calling for ' + biz + ' phones you to go over the details.', 'It sorts out a time and sends you a confirmation.'].forEach(function (s) { var li = document.createElement('li'); li.textContent = s; $('stepList').appendChild(li); });
+    var steps = demo
+      ? ['A patient sends this form (or phones in).', 'The AI assistant answering for ' + biz + ' calls them to go over the details.', 'It books a time, sends a confirmation, and ' + biz + ' sees the booking and a call summary.']
+      : ['You send this form.', 'An AI assistant calling for ' + biz + ' phones you to go over the details.', 'It sorts out a time and sends you a confirmation.'];
+    if (demo) {
+      $('stepsTitle').textContent = 'What your patients experience';
+      $('demoExplainText').textContent = 'This is a sample of the appointment page Hellora sets up for ' + biz + '. Your patients use it to ask for an appointment: they send the form and our AI assistant calls them to book it. The form does not come to you or to us as a message. To feel it for yourself, fill it in with your own mobile number as if you were a patient, and the assistant will call you.';
+      $('demoExplain').hidden = false;
+    }
+    steps.forEach(function (s) { var li = document.createElement('li'); li.textContent = s; $('stepList').appendChild(li); });
     $('footerText').textContent = biz + (demo ? '. Sample page for demonstration only.' : '');
     $('consentText').textContent = 'I agree that ' + biz + ' may call me about this enquiry. The call is made by an AI voice assistant and may be recorded.';
     $('demoNote').hidden = !demo;
