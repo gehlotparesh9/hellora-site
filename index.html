@@ -402,6 +402,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 /* claims dialog + footer link */
 .linklike { display: inline-block; background: none; border: 0; padding: 4px 0; font: inherit; color: var(--muted); text-decoration: underline; cursor: pointer; }
 .linklike:hover { color: var(--ink); }
+.social { display: inline-flex; gap: 10px; align-items: center; }
+.social a { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--line); color: var(--muted); }
+.social a:hover { color: var(--accent); border-color: var(--accent); }
 dialog#claims { border: 1px solid var(--line); border-radius: 16px; padding: 0; width: min(680px, calc(100vw - 32px)); max-height: min(80vh, 720px); background: var(--surface); color: var(--ink); }
 dialog#claims::backdrop { background: rgba(20, 14, 10, .55); }
 dialog#claims .dlg-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); }
@@ -721,9 +724,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; text-ali
     <a class="linklike" href="/terms/">Terms</a>
     <a class="linklike" href="/privacy/">Privacy</a>
     <a class="linklike" href="/refunds/">Refunds</a>
-    <a class="linklike" href="https://www.linkedin.com/company/gethellora" rel="noopener" target="_blank">LinkedIn</a>
-    <a class="linklike" href="https://www.facebook.com/profile.php?id=61596590120586" rel="noopener" target="_blank">Facebook</a>
-    <a class="linklike" href="https://www.instagram.com/gethellora" rel="noopener" target="_blank">Instagram</a>
+    <span class="social">
+      <a href="https://www.linkedin.com/company/gethellora" rel="noopener" target="_blank" aria-label="Hellora on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+      <a href="https://www.facebook.com/profile.php?id=61596590120586" rel="noopener" target="_blank" aria-label="Hellora on Facebook" title="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.25-1.45 1.5-1.45h1.6V4.47c-.28-.04-1.23-.12-2.34-.12-2.31 0-3.9 1.41-3.9 4V10.5H7.7v3h2.66V21h3.14z"/></svg></a>
+      <a href="https://www.instagram.com/gethellora" rel="noopener" target="_blank" aria-label="Hellora on Instagram" title="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+    </span>
     <button type="button" class="linklike" id="claims-open">Claims and availability</button>
   </div>
 </footer>
