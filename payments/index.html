@@ -63,6 +63,9 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .plan { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px; }
 .plan.feat { border-color: var(--accent); border-width: 2px; }
+.plan.sel { border-color: var(--accent); border-width: 3px; box-shadow: 0 10px 30px rgba(249,115,22,.22); position: relative; }
+.plan .chosen { display: none; font-size: 13px; font-weight: 700; color: #C2410C; letter-spacing: .04em; text-transform: uppercase; }
+.plan.sel .chosen { display: block; }
 .plan h3 { font-size: 22px; }
 .plan .amt { font-family: var(--font-display); font-size: 40px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
 .plan .amt small { font-size: 16px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
@@ -111,8 +114,9 @@ footer a{display:inline-block !important;padding:5px 0 !important}
   </div>
 
   <div class="step"><b>2</b><h2>Choose your monthly plan</h2></div>
-  <div class="plans">
+  <div class="plans" id="plans">
     <div class="plan">
+      <div class="chosen">Your choice</div>
       <h3>Standard</h3>
       <div class="amt">C$149 <small>/ month + applicable taxes</small></div>
       <p class="mins">Up to 300 call minutes a month</p>
@@ -125,6 +129,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
       <a class="btn ghost off" data-link="standard" href="#" rel="noopener">Payment link coming soon</a>
     </div>
     <div class="plan feat">
+      <div class="chosen">Your choice</div>
       <h3>Pro</h3>
       <div class="amt">C$349 <small>/ month + applicable taxes</small></div>
       <p class="mins">Up to 1,000 call minutes a month</p>
@@ -136,6 +141,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
       <a class="btn off" data-link="pro" href="#" rel="noopener">Payment link coming soon</a>
     </div>
     <div class="plan">
+      <div class="chosen">Your choice</div>
       <h3>Ultimate</h3>
       <div class="amt">C$699 <small>/ month + applicable taxes</small></div>
       <p class="mins">Unlimited call minutes</p>
@@ -196,6 +202,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
     if (j.founding_open) { sp.innerHTML = 'C$299<small>Founding price, first 8 customers, plus applicable taxes</small>'; enable('setup', L.setupFounding); }
     else { sp.innerHTML = 'C$499<small>One-time, plus applicable taxes</small>'; enable('setup', L.setupRegular); }
   }).catch(function () { sp.textContent = 'Could not load the setup price. Please email hello@hellora.ca.'; });
+  (function () { var m = /[?&]plan=(standard|pro|ultimate)\b/.exec(location.search); if (!m) return; var a = document.querySelector('[data-link="' + m[1] + '"]'); var card = a && a.closest('.plan'); if (card) { card.classList.add('sel'); } })();
   if (isTest) { var n = document.createElement('p'); n.className = 'note'; n.textContent = 'Test mode: use card 4242 4242 4242 4242, any future date and any CVC. No real money is charged.'; document.querySelector('.intro').appendChild(n); }
 })();
 </script>
