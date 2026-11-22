@@ -202,7 +202,7 @@ footer a{display:inline-block !important;padding:5px 0 !important}
     if (j.founding_open) { sp.innerHTML = 'C$299<small>Founding price, first 8 customers, plus applicable taxes</small>'; enable('setup', L.setupFounding); }
     else { sp.innerHTML = 'C$499<small>One-time, plus applicable taxes</small>'; enable('setup', L.setupRegular); }
   }).catch(function () { sp.textContent = 'Could not load the setup price. Please email hello@hellora.ca.'; });
-  (function () { var m = /[?&]plan=(standard|pro|ultimate)\b/.exec(location.search); if (!m) return; var a = document.querySelector('[data-link="' + m[1] + '"]'); var card = a && a.closest('.plan'); if (card) { document.querySelectorAll('.plan').forEach(function (c) { c.classList.remove('feat'); }); card.classList.add('sel'); } })();
+  (function () { var m = /[?&]plan=(standard|pro|ultimate)\b/.exec(location.search); if (!m) return; var a = document.querySelector('[data-link="' + m[1] + '"]'); var card = a && a.closest('.plan'); if (card) { document.querySelectorAll('.plan').forEach(function (c) { c.classList.remove('feat'); }); card.classList.add('sel'); document.querySelectorAll('.plan .btn').forEach(function (b) { b.classList.add('ghost'); }); a.classList.remove('ghost'); } })();
   if (isTest) { var n = document.createElement('p'); n.className = 'note'; n.textContent = 'Test mode: use card 4242 4242 4242 4242, any future date and any CVC. No real money is charged.'; document.querySelector('.intro').appendChild(n); }
 })();
 </script>
